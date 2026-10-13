@@ -1,0 +1,126 @@
+.hero {
+  background:
+    linear-gradient(90deg, rgba(9, 63, 48, 0.92) 0%, rgba(9, 63, 48, 0.65) 60%, rgba(9, 63, 48, 0.35) 100%),
+    url('/images/hero.jpg') center / cover no-repeat;
+  background-color: var(--vert-fonce);
+  color: var(--blanc);
+  padding: var(--espace-8) 0;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-contenu {
+  width: 100%;
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 0 var(--espace-5);
+}
+
+.badge {
+  display: inline-block;
+  background: var(--dore-clair);
+  color: var(--texte);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px var(--espace-5);
+  border-radius: 999px;
+  margin-bottom: var(--espace-5);
+}
+
+.hero-contenu h1 {
+  color: var(--blanc);
+  font-size: clamp(38px, 6vw, 76px);
+  line-height: 1.08;
+  max-width: 920px;
+  margin: 0 0 var(--espace-5);
+}
+
+.sous-titre {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 0 var(--espace-6);
+}
+
+.recherche {
+  display: flex;
+  gap: var(--espace-2);
+  background: var(--blanc);
+  padding: 10px;
+  border-radius: var(--rayon-moyen);
+  max-width: 820px;
+  margin-bottom: var(--espace-5);
+}
+
+.recherche input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--police-texte);
+  font-size: 17px;
+  padding: 0 var(--espace-4);
+  background: transparent;
+  color: var(--texte);
+}
+
+.bouton-recherche {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  background: var(--orange);
+  color: var(--blanc);
+  border: none;
+  font-family: var(--police-texte);
+  font-weight: 600;
+  font-size: 17px;
+  padding: 14px var(--espace-6);
+  border-radius: var(--rayon-petit);
+  cursor: pointer;
+}
+
+.bouton-recherche:hover {
+  background: var(--orange-fonce);
+}
+
+.bouton-explorer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  background: var(--blanc);
+  color: var(--vert);
+  font-size: 17px;
+  font-weight: 600;
+  padding: 14px var(--espace-6);
+  border-radius: var(--rayon-petit);
+}
+
+.bouton-explorer:hover {
+  text-decoration: none;
+  background: var(--vert-clair);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 0;
+    padding: var(--espace-7) 0;
+    background:
+      linear-gradient(180deg, rgba(9, 63, 48, 0.85), rgba(9, 63, 48, 0.7)),
+      url('/images/hero.jpg') center / cover no-repeat;
+    background-color: var(--vert-fonce);
+  }
+
+  .sous-titre {
+    font-size: 18px;
+  }
+
+  .recherche {
+    flex-direction: column;
+  }
+
+  .recherche input {
+    padding: var(--espace-3) var(--espace-4);
+  }
+}

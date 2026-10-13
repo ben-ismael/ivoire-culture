@@ -1,0 +1,68 @@
+<section class="territoires" [class.visible]="visible()" (window:resize)="majProgression()">
+  <div class="contenu">
+
+    <header class="entete">
+      <div class="bloc-titre">
+        <p class="sur-titre">Territoires &amp; Mémoires</p>
+        <h2>
+          <span class="ligne">Chaque terre</span>
+          <em class="ligne">porte une histoire.</em>
+        </h2>
+      </div>
+
+      <div class="intro">
+        <p>
+          Des rivages du Sud-Comoé aux montagnes de l'Ouest, partez à la rencontre
+          des paysages, des peuples et des mémoires vivantes.
+        </p>
+        <div class="intro-actions">
+          <a routerLink="/regions" class="lien-explorer">
+            Explorer toutes les régions <i class="bi bi-arrow-right"></i>
+          </a>
+          <div class="fleches">
+            <button type="button" class="fleche" aria-label="Régions précédentes"
+                    [disabled]="debut()" (click)="defiler(-1)">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <button type="button" class="fleche" aria-label="Régions suivantes"
+                    [disabled]="fin()" (click)="defiler(1)">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="piste" #piste (scroll)="majProgression()">
+      @for (region of regions(); track region.id; let i = $index) {
+        <div class="enveloppe" [style.--i]="i">
+          <a class="carte"
+             [routerLink]="['/regions', region.slug]"
+             (mousemove)="incliner($event)"
+             (mouseleave)="redresser($event)">
+            <img [src]="region.image" [alt]="region.imageAlt" loading="lazy">
+            <span class="voile"></span>
+
+            <span class="numero">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <span class="bouton-carte"><i class="bi bi-arrow-right"></i></span>
+
+            <div class="bloc-texte">
+              <span class="badge">{{ region.zone }}</span>
+              <h3>{{ region.nom }}</h3>
+              <div class="description">
+                <div class="description-interieur">
+                  <p>{{ region.accroche }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      }
+    </div>
+
+    <div class="progression" aria-hidden="true">
+      <span [style.width.%]="progression()"></span>
+    </div>
+
+  </div>
+</section>

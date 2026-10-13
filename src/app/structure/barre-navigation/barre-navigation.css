@@ -1,0 +1,383 @@
+.barre {
+  background: var(--blanc);
+  border-bottom: 1px solid var(--bordure);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.barre-contenu {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: var(--espace-3) var(--espace-5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espace-5);
+}
+
+/* ===== Logo : image collée au nom ===== */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--police-titre);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--vert);
+}
+
+.logo:hover {
+  text-decoration: none;
+}
+
+.logo-image {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-right: -38px;
+}
+
+.logo-texte {
+  line-height: 1;
+}
+
+/* ===== Liens (ordinateur) ===== */
+.liens {
+  display: flex;
+  gap: var(--espace-5);
+}
+
+.liens a {
+  color: var(--texte);
+  font-weight: 500;
+  padding: var(--espace-2) 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s;
+}
+
+.liens a:hover {
+  color: var(--vert);
+  text-decoration: none;
+}
+
+.liens a.actif {
+  color: var(--vert);
+  border-bottom-color: var(--orange);
+}
+
+/* ===== Actions : recherche et connexion ===== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+}
+
+.bouton-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--blanc);
+  color: var(--texte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon-petit);
+  font-size: 18px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s,
+              transform 0.2s, box-shadow 0.2s;
+}
+
+.bouton-icone i {
+  transition: transform 0.2s;
+}
+
+.bouton-icone:hover {
+  background: var(--vert);
+  color: var(--blanc);
+  border-color: var(--vert);
+  transform: translateY(-2px);
+  box-shadow: var(--ombre-douce);
+  text-decoration: none;
+}
+
+.bouton-icone:hover i {
+  transform: scale(1.15);
+}
+
+.bouton-icone:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.bouton-connexion {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  height: 44px;
+  padding: 0 var(--espace-4);
+  background: var(--orange);
+  color: var(--blanc);
+  border: 1px solid var(--orange);
+  border-radius: var(--rayon-petit);
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.bouton-connexion i {
+  font-size: 18px;
+}
+
+.bouton-connexion:hover {
+  background: var(--orange-fonce);
+  border-color: var(--orange-fonce);
+  text-decoration: none;
+}
+
+/* ===== Bouton hamburger (caché sur ordinateur) ===== */
+.hamburger {
+  display: none;
+  position: relative;
+  z-index: 170;               /* reste visible au-dessus du tiroir, pour devenir la croix */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon-petit);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.hamburger:hover {
+  background: var(--vert-clair);
+  border-color: var(--vert);
+}
+
+.trait {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 2px;
+  margin: -1px 0 0 -11px;
+  background: var(--vert-fonce);
+  border-radius: 2px;
+  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.trait:nth-child(1) { transform: translateY(-7px); }
+.trait:nth-child(3) { transform: translateY(7px); }
+
+/* Animation croisée : les trois traits deviennent une croix */
+.hamburger.ouvert .trait:nth-child(1) { transform: translateY(0) rotate(45deg); }
+.hamburger.ouvert .trait:nth-child(2) { opacity: 0; }
+.hamburger.ouvert .trait:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+
+/* ===== Fond assombri et flouté ===== */
+.voile {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(5, 59, 41, 0.35);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+}
+
+.voile.ouvert {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, visibility 0s;
+}
+
+/* ===== Tiroir (caché sur ordinateur) ===== */
+.tiroir {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 160;
+  width: min(86vw, 360px);
+  flex-direction: column;
+  padding: 88px var(--espace-5) var(--espace-5);
+  overflow-y: auto;
+  background: var(--ivoire);
+  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.25);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
+}
+
+.tiroir.ouvert {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.3s ease-in-out, visibility 0s;
+}
+
+.tiroir-liens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-5);
+}
+
+.tiroir-liens a {
+  align-self: flex-start;
+  padding-bottom: var(--espace-1);
+  font-family: var(--police-titre);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--vert-fonce);
+  border-bottom: 2px solid transparent;
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+.tiroir-liens a.actif {
+  color: var(--vert);
+  border-bottom-color: var(--orange);
+}
+
+.tiroir-liens a:hover {
+  text-decoration: none;
+  color: var(--vert);
+}
+
+/* Les liens apparaissent l'un après l'autre à l'ouverture */
+.tiroir.ouvert .tiroir-liens a {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition-delay: calc(0.1s + var(--i) * 0.06s);
+}
+
+.tiroir-secondaire {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-3);
+  margin-top: var(--espace-6);
+  padding-top: var(--espace-5);
+  border-top: 1px solid var(--bordure);
+}
+
+.tiroir-secondaire a {
+  align-self: flex-start;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--texte-secondaire);
+}
+
+.tiroir-secondaire a:hover {
+  color: var(--vert);
+  text-decoration: none;
+}
+
+.tiroir-bouton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  margin-top: auto;
+  padding: 16px var(--espace-5);
+  font-weight: 600;
+  color: var(--blanc);
+  background: var(--orange);
+  border-radius: var(--rayon-petit);
+  transition: background 0.2s;
+}
+
+.tiroir-bouton:hover {
+  background: var(--orange-fonce);
+  text-decoration: none;
+}
+
+/* ===== Mobile et tablette (moins de 768px) ===== */
+@media (max-width: 767px) {
+  .barre-contenu {
+    padding: var(--espace-3) var(--espace-4);
+    gap: var(--espace-3);
+  }
+
+    .logo {
+    font-size: 22px;
+    gap: 3px;
+  }
+
+  .logo-image {
+    height: 46px;
+    margin-right: -31px;
+  }
+
+  /* On masque le menu horizontal */
+  .liens {
+    display: none;
+  }
+
+  .actions {
+    gap: var(--espace-2);
+  }
+
+  /* « Connexion » ne garde que l'icône */
+  .bouton-connexion span {
+    display: none;
+  }
+
+  .bouton-connexion {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  /* On affiche le hamburger, le fond et le tiroir */
+  .hamburger {
+    display: block;
+  }
+
+  .voile {
+    display: block;
+  }
+
+  .tiroir {
+    display: flex;
+  }
+}
+
+/* ===== Très petits écrans ===== */
+@media (max-width: 359px) {
+  .logo {
+    font-size: 20px;
+    gap: 2px;
+  }
+
+  .logo-image {
+    height: 40px;
+  }
+
+  .bouton-icone,
+  .bouton-connexion,
+  .hamburger {
+    width: 40px;
+    height: 40px;
+  }
+
+  .actions {
+    gap: 6px;
+  }
+}
+
+/* ===== Accessibilité : mouvement réduit ===== */
+@media (prefers-reduced-motion: reduce) {
+  .trait,
+  .voile,
+  .voile.ouvert,
+  .tiroir,
+  .tiroir.ouvert,
+  .tiroir-liens a,
+  .tiroir.ouvert .tiroir-liens a {
+    transition: none;
+  }
+}

@@ -1,0 +1,61 @@
+<header class="barre">
+  <div class="barre-contenu">
+    <a routerLink="/" class="logo" (click)="fermer()" aria-label="IvoireCulture, accueil">
+  <img src="images/logo.png" alt="" class="logo-image">
+  <span class="logo-texte">IvoireCulture</span>
+</a>
+
+    <nav class="liens" aria-label="Navigation principale">
+      <a routerLink="/" routerLinkActive="actif" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
+      <a routerLink="/regions" routerLinkActive="actif">Régions</a>
+      <a routerLink="/culture" routerLinkActive="actif">Cultures</a>
+      <a routerLink="/evenements" routerLinkActive="actif">Événements</a>
+    </nav>
+
+    <div class="actions">
+      <a routerLink="/recherche" class="bouton-icone" aria-label="Rechercher" (click)="fermer()">
+        <i class="bi bi-search"></i>
+      </a>
+
+      <a routerLink="/connexion" class="bouton-connexion" aria-label="Connexion" (click)="fermer()">
+        <i class="bi bi-person"></i>
+        <span>Connexion</span>
+      </a>
+
+      <button type="button" class="hamburger" [class.ouvert]="ouvert()"
+              (click)="basculer()"
+              [attr.aria-expanded]="ouvert()"
+              aria-controls="menu-mobile"
+              [attr.aria-label]="ouvert() ? 'Fermer le menu' : 'Ouvrir le menu'">
+        <span class="trait"></span>
+        <span class="trait"></span>
+        <span class="trait"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Fond assombri et flouté derrière le tiroir -->
+  <div class="voile" [class.ouvert]="ouvert()" (click)="fermer()" aria-hidden="true"></div>
+
+  <!-- Tiroir mobile -->
+  <aside id="menu-mobile" class="tiroir" [class.ouvert]="ouvert()"
+         [attr.inert]="ouvert() ? null : ''" aria-label="Menu mobile">
+
+    <nav class="tiroir-liens" aria-label="Navigation mobile">
+      <a routerLink="/" routerLinkActive="actif" [routerLinkActiveOptions]="{ exact: true }"
+         [style.--i]="0" (click)="fermer()">Accueil</a>
+      <a routerLink="/regions" routerLinkActive="actif" [style.--i]="1" (click)="fermer()">Régions</a>
+      <a routerLink="/culture" routerLinkActive="actif" [style.--i]="2" (click)="fermer()">Cultures</a>
+      <a routerLink="/evenements" routerLinkActive="actif" [style.--i]="3" (click)="fermer()">Événements</a>
+    </nav>
+
+    <nav class="tiroir-secondaire" aria-label="Liens secondaires">
+      <a routerLink="/a-propos" (click)="fermer()">À propos</a>
+      <a routerLink="/contact" (click)="fermer()">Contact</a>
+    </nav>
+
+    <a routerLink="/connexion" class="tiroir-bouton" (click)="fermer()">
+      <i class="bi bi-person"></i> Se connecter / S'inscrire
+    </a>
+  </aside>
+</header>

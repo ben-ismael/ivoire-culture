@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "nom": "Grand-Bassam",
+    "slug": "region-demo-a",
+    "zone": "Sud-Comoé",
+    "accroche": "Cité historique, mémoire coloniale et traditions lagunaires au bord de l'océan.",
+    "description": "Texte de présentation de Grand-Bassam, à remplacer par un contenu rédigé et sourcé avant publication.",
+    "image": "images/grand-bassam.jpg",
+    "imageAlt": "Vue de Grand-Bassam",
+    "statut": "publie"
+  },
+  {
+    "id": 2,
+    "nom": "Man",
+    "slug": "region-demo-b",
+    "zone": "Tonkpi",
+    "accroche": "Cité des montagnes de l'Ouest, entre paysages verdoyants et traditions vivantes.",
+    "description": "Texte de présentation de Man, à remplacer par un contenu rédigé et sourcé avant publication.",
+    "image": "images/man.jpg",
+    "imageAlt": "Vue de Man",
+    "statut": "publie"
+  },
+  {
+    "id": 3,
+    "nom": "Abidjan",
+    "slug": "region-demo-c",
+    "zone": "District autonome",
+    "accroche": "Métropole lagunaire en mouvement, carrefour de cultures, de musiques et de créations.",
+    "description": "Texte de présentation d'Abidjan, à remplacer par un contenu rédigé et sourcé avant publication.",
+    "image": "images/abidjan.jpg",
+    "imageAlt": "Vue d'Abidjan",
+    "statut": "publie"
+  },
+  {
+    "id": 4,
+    "nom": "Korhogo",
+    "slug": "region-demo-d",
+    "zone": "Savanes",
+    "accroche": "Cité du Nord, réputée pour ses savoir-faire artisanaux transmis de génération en génération.",
+    "description": "Texte de présentation de Korhogo, à remplacer par un contenu rédigé et sourcé avant publication.",
+    "image": "images/korhogo.jpg",
+    "imageAlt": "Vue de Korhogo",
+    "statut": "publie"
+  },
+  {
+    "id": 5,
+    "nom": "Yamoussoukro",
+    "slug": "region-demo-e",
+    "zone": "District autonome",
+    "accroche": "Capitale politique du pays, entre monuments emblématiques et mémoire collective.",
+    "description": "Texte de présentation de Yamoussoukro, à remplacer par un contenu rédigé et sourcé avant publication.",
+    "image": "images/yamoussoukro.jpg",
+    "imageAlt": "Vue de Yamoussoukro",
+    "statut": "publie"
+  },
+  {
+    "id": 6,
+    "nom": "Odienné",
+    "slug": "region-demo-f",
+    "zone": "Denguélé",
+    "accroche": "Entrée en brouillon : elle ne doit pas apparaître côté public.",
+    "description": "Cette région a le statut brouillon, pour tester le filtrage par statut dans le service.",
+    "image": "images/placeholder.jpg",
+    "imageAlt": "Vue d'Odienné",
+    "statut": "brouillon"
+  },
+    {
+    "id": 7,
+    "nom": "Marahoué",
+    "slug": "region-demo-g",
+    "zone": "Sassandra-Marahoué",
+    "accroche": "Région du Centre-Ouest, où les danses et les traditions restent bien vivantes.",
+    "description": "Texte de présentation de la Marahoué, à remplacer par un contenu rédigé et sourcé avant publication.",
+    "image": "images/placeholder.jpg",
+    "imageAlt": "Vue de la Marahoué",
+    "statut": "publie"
+  }
+]

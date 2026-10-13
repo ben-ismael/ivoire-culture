@@ -1,0 +1,392 @@
+:host {
+  display: block;
+  --courbe: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.histoires {
+  background: var(--ivoire);
+  padding: var(--espace-8) 0;
+}
+
+.contenu {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 0 var(--espace-5);
+}
+
+/* ===== En-tête ===== */
+.entete {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--espace-7);
+  align-items: center;
+  margin-bottom: var(--espace-7);
+}
+
+.sur-titre {
+  margin: 0 0 var(--espace-3);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vert-fonce);
+}
+
+.bloc-titre h2 {
+  margin: 0;
+  font-size: clamp(36px, 5.4vw, 72px);
+  line-height: 1.08;
+}
+
+.ligne {
+  display: block;
+  white-space: nowrap;
+}
+
+.bloc-titre em {
+  color: var(--dore);
+}
+
+.intro {
+  border-left: 1px solid var(--dore);
+  padding-left: var(--espace-6);
+}
+
+.etiquette {
+  margin: 0 0 var(--espace-3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dore);
+}
+
+.description {
+  margin: 0;
+  max-width: 480px;
+  font-size: 17px;
+  color: var(--texte-secondaire);
+}
+
+/* ===== Grille 2 x 2 ===== */
+.grille {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espace-6);
+}
+
+.carte {
+  display: flex;
+  min-height: 400px;
+  background: var(--blanc);
+  border-radius: 20px;
+  overflow: hidden;
+  color: var(--texte);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s var(--courbe), box-shadow 0.4s var(--courbe);
+}
+
+.carte:hover,
+.carte:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(9, 63, 48, 0.08);
+  text-decoration: none;
+}
+
+/* ----- Côté image ----- */
+.visuel {
+  position: relative;
+  flex: 0 0 45%;
+  overflow: hidden;
+  background: var(--vert-clair);
+}
+
+.visuel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--courbe);
+}
+
+.carte:hover .visuel img,
+.carte:focus-visible .visuel img {
+  transform: scale(1.06);
+}
+
+/* Remplace l'image quand il n'y en a pas */
+.sans-image {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--vert-clair), var(--dore-clair));
+}
+
+/* Badge de catégorie en verre dépoli */
+.badge-categorie {
+  position: absolute;
+  top: var(--espace-4);
+  left: var(--espace-4);
+  max-width: calc(100% - 32px);
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blanc);
+  background: rgba(9, 63, 48, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+/* ----- Côté texte ----- */
+.texte {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--espace-6);
+}
+
+.meta {
+  margin: 0 0 var(--espace-4);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.texte h3 {
+  margin: 0 0 var(--espace-4);
+  font-family: var(--police-titre);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--vert-fonce);
+  transform-origin: left center;
+  transition: transform 0.4s var(--courbe);
+}
+
+.carte:hover h3,
+.carte:focus-visible h3 {
+  transform: scale(1.03);
+}
+
+.resume {
+  margin: 0;
+  font-size: 16px;
+  color: var(--texte-secondaire);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lien {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  margin-top: auto;
+  padding-top: var(--espace-5);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vert-fonce);
+  transition: color 0.3s;
+}
+
+.lien i {
+  transition: transform 0.3s var(--courbe);
+}
+
+.carte:hover .lien,
+.carte:focus-visible .lien {
+  color: var(--orange);
+}
+
+.carte:hover .lien i,
+.carte:focus-visible .lien i {
+  transform: translateX(6px);
+}
+
+/* ===== Zone du bas : compteur + bouton principal ===== */
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-6);
+  flex-wrap: wrap;
+  margin-top: var(--espace-7);
+}
+
+.compteur {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texte-secondaire);
+  white-space: nowrap;
+}
+
+.compteur strong {
+  font-weight: 700;
+  color: var(--vert);
+}
+
+.bouton-principal {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: 18px 40px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--blanc);
+  background: var(--vert-fonce);
+  border-radius: 999px;
+  transition: background 0.3s, transform 0.3s var(--courbe), box-shadow 0.3s;
+}
+
+.bouton-principal i {
+  transition: transform 0.3s var(--courbe);
+}
+
+.bouton-principal:hover,
+.bouton-principal:focus-visible {
+  background: var(--orange);
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(232, 117, 36, 0.35);
+  text-decoration: none;
+}
+
+.bouton-principal:hover i {
+  transform: translateX(4px);
+}
+
+/* ===== Animation d'apparition au défilement ===== */
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(var(--decalage, 30px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.histoires:not(.visible) .entete,
+.histoires:not(.visible) .carte,
+.histoires:not(.visible) .action {
+  opacity: 0;
+}
+
+/* Étape 1 : l'en-tête */
+.visible .entete {
+  --decalage: 30px;
+  animation: apparition 0.6s var(--courbe) backwards;
+}
+
+/* Étape 2 : les cartes, une par une (0,15 s d'écart) */
+.visible .carte {
+  --decalage: 40px;
+  animation: apparition 0.7s var(--courbe) backwards;
+  animation-delay: calc(0.35s + var(--i) * 0.15s);
+}
+
+/* Étape 3 : le compteur et le bouton, en dernier */
+.visible .action {
+  --decalage: 20px;
+  animation: apparition 0.6s var(--courbe) backwards;
+  animation-delay: 1.1s;
+}
+
+/* ===== Tablette : une colonne pour garder des cartes confortables ===== */
+@media (max-width: 1023px) {
+  .entete {
+    grid-template-columns: 1fr;
+    gap: var(--espace-5);
+  }
+
+  .intro {
+    border-left: none;
+    border-top: 1px solid var(--dore);
+    padding: var(--espace-4) 0 0;
+  }
+
+  .grille {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 767px) {
+  .histoires {
+    padding: var(--espace-7) 0;
+  }
+
+  .ligne {
+    white-space: normal;
+  }
+
+  .texte {
+    padding: var(--espace-5);
+  }
+
+  .texte h3 {
+    font-size: 26px;
+  }
+
+  /* Le compteur passe au-dessus du bouton, centré, et peut se couper */
+  .action {
+    flex-direction: column;
+    gap: var(--espace-4);
+  }
+
+  .compteur {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* Très petits écrans : carte verticale (image en haut, texte en bas) */
+@media (max-width: 559px) {
+  .carte {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .visuel {
+    flex: none;
+    height: 240px;
+  }
+
+  .bouton-principal {
+    padding: 16px 28px;
+    font-size: 16px;
+  }
+}
+
+/* ===== Accessibilité : mouvement réduit ===== */
+@media (prefers-reduced-motion: reduce) {
+  .histoires:not(.visible) .entete,
+  .histoires:not(.visible) .carte,
+  .histoires:not(.visible) .action {
+    opacity: 1;
+  }
+
+  .visible .entete,
+  .visible .carte,
+  .visible .action {
+    animation: none;
+  }
+
+  .carte,
+  .visuel img,
+  .texte h3,
+  .lien i,
+  .bouton-principal,
+  .bouton-principal i {
+    transition: none;
+  }
+}

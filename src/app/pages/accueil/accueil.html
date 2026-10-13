@@ -1,0 +1,27 @@
+<section class="hero">
+  <div class="hero-contenu">
+    <span class="badge">Patrimoine · Création · Transmission</span>
+
+    <h1>Découvrez la richesse culturelle de la Côte d'Ivoire</h1>
+
+    <p class="sous-titre">
+      Parcourez un patrimoine vivant, rencontrez ses gardiens et laissez-vous
+      guider par les histoires de nos régions.
+    </p>
+
+    <form class="recherche" (submit)="$event.preventDefault()">
+      <input type="search" placeholder="Rechercher une région, un plat, une danse..." aria-label="Rechercher">
+      <button type="submit" class="bouton-recherche">
+        <i class="bi bi-search"></i> Rechercher
+      </button>
+    </form>
+
+    <a routerLink="/culture" class="bouton-explorer">
+      Explorer la culture <i class="bi bi-arrow-right"></i>
+    </a>
+  </div>
+</section>
+
+<app-territoires />
+<app-histoires-populaires />
+<app-rendez-vous />

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "nom": "Gastronomie",
+    "slug": "gastronomie",
+    "description": "Plats, ingrédients et traditions culinaires.",
+    "icone": "utensils"
+  },
+  {
+    "id": 2,
+    "nom": "Danses",
+    "slug": "danses",
+    "description": "Danses traditionnelles, leur contexte et leur signification.",
+    "icone": "users"
+  },
+  {
+    "id": 3,
+    "nom": "Musiques",
+    "slug": "musiques",
+    "description": "Styles, artistes et instruments musicaux.",
+    "icone": "music"
+  },
+  {
+    "id": 4,
+    "nom": "Artisanat",
+    "slug": "artisanat",
+    "description": "Savoir-faire, matériaux et objets artisanaux.",
+    "icone": "hammer"
+  },
+  {
+    "id": 5,
+    "nom": "Contes et légendes",
+    "slug": "contes-et-legendes",
+    "description": "Récits traditionnels transmis de génération en génération.",
+    "icone": "book-open"
+  }
+]

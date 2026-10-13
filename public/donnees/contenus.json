@@ -1,0 +1,165 @@
+[
+  {
+    "id": 1,
+    "titre": "Le garba, bien plus qu'un plat",
+    "slug": "garba",
+    "resume": "Attiéké, thon frit, piment et une histoire populaire devenue emblème national.",
+    "description": "Description fictive du garba. Ce texte sera remplacé par un contenu réel et sourcé. Deuxième paragraphe pour tester un texte long sur la page détail. Troisième paragraphe, uniquement pour allonger le contenu.",
+    "categorieSlug": "gastronomie",
+    "regionSlug": "region-demo-c",
+    "image": "images/garba.jpg",
+    "imageAlt": "Image de démonstration du garba",
+    "imageCredit": "Crédit fictif",
+    "galerie": [
+      { "url": "images/placeholder.jpg", "alt": "Galerie 1", "credit": "Crédit fictif" },
+      { "url": "images/placeholder.jpg", "alt": "Galerie 2" },
+      { "url": "images/placeholder.jpg", "alt": "Galerie 3" }
+    ],
+    "videoUrl": "https://www.youtube.com/embed/VIDEO_FICTIVE",
+    "auteur": "Rédaction fictive",
+    "sources": [
+      { "type": "livre", "titre": "Source fictive 1", "auteur": "Auteur fictif" },
+      { "type": "site", "titre": "Source fictive 2", "url": "https://exemple.org" }
+    ],
+    "tempsLecture": 6,
+    "misEnAvant": true,
+    "datePublication": "2026-09-01",
+    "dateMiseAJour": "2026-09-15",
+    "statut": "publie",
+    "details": {
+      "ingredients": ["Ingrédient fictif 1", "Ingrédient fictif 2", "Ingrédient fictif 3"],
+      "preparation": "Étapes de préparation fictives."
+    }
+  },
+  {
+    "id": 2,
+    "titre": "Plat de démonstration B",
+    "slug": "plat-demo-b",
+    "resume": "Un résumé fictif de longueur moyenne pour tester l'affichage sur la carte.",
+    "description": "Description fictive courte.",
+    "categorieSlug": "gastronomie",
+    "regionSlug": "region-demo-b",
+    "image": "",
+    "imageAlt": "",
+    "misEnAvant": false,
+    "datePublication": "2026-09-05",
+    "dateMiseAJour": "2026-09-05",
+    "statut": "publie",
+    "details": {
+      "ingredients": ["Ingrédient fictif 1", "Ingrédient fictif 2"],
+      "preparation": "Préparation fictive."
+    }
+  },
+  {
+    "id": 3,
+    "titre": "Le Zaouli, grâce et virtuosité",
+    "slug": "zaouli",
+    "resume": "Une danse spectaculaire du peuple Gouro, inscrite au patrimoine immatériel.",
+    "description": "Description fictive du Zaouli, avec son contexte. Ce texte sera remplacé par un contenu réel et sourcé.",
+    "categorieSlug": "danses",
+    "regionSlug": "region-demo-g",
+    "image": "images/zaouli.jpeg",
+    "imageAlt": "Image de démonstration du Zaouli",
+    "videoUrl": "https://www.youtube.com/embed/VIDEO_FICTIVE",
+    "sources": [
+      { "type": "article", "titre": "Article fictif", "auteur": "Auteur fictif" }
+    ],
+    "tempsLecture": 7,
+    "misEnAvant": true,
+    "datePublication": "2026-09-10",
+    "dateMiseAJour": "2026-09-10",
+    "statut": "publie",
+    "details": {
+      "signification": "Signification fictive.",
+      "tenue": "Tenue fictive.",
+      "instruments": ["Instrument fictif 1", "Instrument fictif 2"]
+    }
+  },
+  {
+    "id": 4,
+    "titre": "Le coupé-décalé, un rythme qui fait danser",
+    "slug": "coupe-decale",
+    "resume": "Un style festif né dans la diaspora ivoirienne et devenu un phénomène populaire.",
+    "description": "Description fictive d'une musique de démonstration. Ce texte sera remplacé par un contenu réel et sourcé.",
+    "categorieSlug": "musiques",
+    "regionSlug": "region-demo-c",
+    "image": "images/coupe-decale.jpg",
+    "imageAlt": "Image de démonstration du coupé-décalé",
+    "auteur": "Rédaction fictive",
+    "tempsLecture": 5,
+    "misEnAvant": true,
+    "datePublication": "2026-09-12",
+    "dateMiseAJour": "2026-09-12",
+    "statut": "publie",
+    "details": {
+      "artiste": "Artiste fictif",
+      "contexte": "Contexte fictif."
+    }
+  },
+  {
+    "id": 5,
+    "titre": "Le tissage de Korhogo, un art du fil",
+    "slug": "tissage-korhogo",
+    "resume": "Fils, couleurs et gestes précis : un savoir-faire du Nord transmis d'atelier en atelier.",
+    "description": "Description fictive d'une pièce d'artisanat de démonstration. Ce texte sera remplacé par un contenu réel et sourcé.",
+    "categorieSlug": "artisanat",
+    "regionSlug": "region-demo-d",
+    "image": "images/tissage.jpg",
+    "imageAlt": "Image de démonstration du tissage",
+    "galerie": [
+      { "url": "images/placeholder.jpg", "alt": "Galerie 1" },
+      { "url": "images/placeholder.jpg", "alt": "Galerie 2" }
+    ],
+    "sources": [
+      { "type": "institution", "titre": "Institution fictive" }
+    ],
+    "tempsLecture": 8,
+    "misEnAvant": true,
+    "datePublication": "2026-09-14",
+    "dateMiseAJour": "2026-09-20",
+    "statut": "publie",
+    "details": {
+      "materiaux": ["Matériau fictif 1", "Matériau fictif 2"],
+      "savoirFaire": "Méthode fictive.",
+      "usage": "Usage fictif."
+    }
+  },
+  {
+    "id": 6,
+    "titre": "Conte de démonstration avec un titre volontairement long pour tester l'affichage",
+    "slug": "conte-demo",
+    "resume": "Résumé fictif d'un conte.",
+    "description": "Récit fictif de démonstration. Premier paragraphe du récit. Deuxième paragraphe du récit. Troisième paragraphe du récit. Quatrième paragraphe, pour tester un texte long sur la page détail.",
+    "categorieSlug": "contes-et-legendes",
+    "regionSlug": "region-demo-e",
+    "image": "images/placeholder.jpg",
+    "imageAlt": "Illustration de démonstration du conte",
+    "auteur": "Collecteur fictif",
+    "sources": [
+      { "type": "entretien", "titre": "Entretien fictif" }
+    ],
+    "misEnAvant": false,
+    "datePublication": "2026-09-18",
+    "dateMiseAJour": "2026-09-18",
+    "statut": "publie",
+    "details": {
+      "theme": "Thème fictif",
+      "collecteur": "Collecteur fictif"
+    }
+  },
+  {
+    "id": 7,
+    "titre": "Danse de démonstration en brouillon",
+    "slug": "danse-demo-brouillon",
+    "resume": "Cette entrée ne doit pas apparaître côté public.",
+    "description": "Contenu en brouillon, masqué par le service.",
+    "categorieSlug": "danses",
+    "regionSlug": "region-demo-b",
+    "image": "images/placeholder.jpg",
+    "imageAlt": "Image de démonstration",
+    "misEnAvant": false,
+    "datePublication": "2026-10-01",
+    "dateMiseAJour": "2026-10-01",
+    "statut": "brouillon"
+  }
+]

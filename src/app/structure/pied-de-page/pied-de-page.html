@@ -1,0 +1,93 @@
+<footer class="pied" [class.visible]="visible()">
+  <div class="interieur">
+
+    <div class="colonnes">
+
+      <!-- Colonne 1 : marque et communauté -->
+      <div class="colonne marque">
+        <a routerLink="/" class="logo">IvoireCulture</a>
+        <p class="presentation">
+          La plateforme de découverte, de transmission et de valorisation des cultures ivoiriennes.
+        </p>
+        <div class="reseaux">
+          @for (r of reseaux; track r.nom) {
+            <a href="#" class="puce" [attr.aria-label]="r.nom" (click)="$event.preventDefault()">
+              <i class="bi" [class]="r.icone"></i>
+            </a>
+          }
+        </div>
+      </div>
+
+      <!-- Colonne 2 : explorer -->
+      <nav class="colonne" aria-label="Explorer">
+        <h4>Explorer</h4>
+        <ul>
+          <li><a routerLink="/regions">Régions &amp; Territoires</a></li>
+          <li><a routerLink="/culture">Histoires &amp; Récits</a></li>
+          <li><a routerLink="/evenements">Agenda des Événements</a></li>
+          <li><a routerLink="/culture">Patrimoine &amp; Traditions</a></li>
+          <li><a routerLink="/culture/gastronomie">Gastronomie</a></li>
+        </ul>
+      </nav>
+
+      <!-- Colonne 3 : à propos et contact -->
+      <nav class="colonne" aria-label="À propos et contact">
+        <h4>À propos &amp; Contact</h4>
+        <ul>
+          <li><a routerLink="/a-propos">Notre Mission</a></li>
+          <li><a routerLink="/contact">Proposer un événement</a></li>
+          <li><a routerLink="/contact">Devenir Partenaire</a></li>
+          <li><a routerLink="/contact">Espace Presse</a></li>
+          <li><a routerLink="/contact">Contactez-nous</a></li>
+        </ul>
+      </nav>
+
+      <!-- Colonne 4 : newsletter -->
+      <div class="colonne newsletter">
+        <h4>La lettre culturelle</h4>
+        <p class="texte-newsletter">
+          Une sélection inspirante de nos plus beaux récits, une fois par mois.
+        </p>
+
+        @if (inscrit()) {
+          <p class="confirmation" role="status">
+            <i class="bi bi-check-circle"></i> Merci ! Votre inscription est enregistrée.
+          </p>
+        } @else {
+          <form class="champ" (submit)="inscrire($event)">
+            <input type="email" name="email" required
+                   placeholder="Votre adresse e-mail..."
+                   aria-label="Votre adresse e-mail">
+            <button type="submit" aria-label="S'inscrire à la lettre culturelle">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </form>
+          <p class="reassurance">
+            <i class="bi bi-lock"></i> Vos données sont protégées. Désabonnement en un clic.
+          </p>
+        }
+      </div>
+
+    </div>
+
+    <!-- Barre inférieure -->
+    <div class="barre-basse">
+      <p class="copyright">© {{ annee }} IvoireCulture — La culture nous rassemble.</p>
+
+      <nav class="legal" aria-label="Informations légales">
+        <a routerLink="/mentions-legales">Mentions légales</a>
+        <span aria-hidden="true">•</span>
+        <a routerLink="/confidentialite">Confidentialité</a>
+        <span aria-hidden="true">•</span>
+        <a routerLink="/accessibilite">Accessibilité</a>
+        <span aria-hidden="true">•</span>
+        <a routerLink="/cookies">Gestion des cookies</a>
+      </nav>
+
+      <button type="button" class="retour" (click)="retourEnHaut()">
+        Retour en haut <i class="bi bi-arrow-up"></i>
+      </button>
+    </div>
+
+  </div>
+</footer>

@@ -1,0 +1,447 @@
+:host {
+  display: block;
+  --courbe: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rdv {
+  background: var(--blanc);
+  padding: var(--espace-8) 0;
+}
+
+.contenu {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 0 var(--espace-5);
+}
+
+/* ===== En-tête ===== */
+.entete {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--espace-7);
+  align-items: center;
+  margin-bottom: var(--espace-7);
+}
+
+.sur-titre {
+  margin: 0 0 var(--espace-3);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vert);
+}
+
+.bloc-titre h2 {
+  margin: 0;
+  font-size: clamp(36px, 5.4vw, 72px);
+  line-height: 1.08;
+}
+
+.ligne {
+  display: block;
+  white-space: nowrap;
+}
+
+.bloc-titre em {
+  color: var(--dore);
+}
+
+.intro {
+  border-left: 1px solid var(--dore);
+  padding-left: var(--espace-6);
+}
+
+.etiquette {
+  margin: 0 0 var(--espace-3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dore);
+}
+
+.description {
+  margin: 0 0 var(--espace-4);
+  max-width: 480px;
+  font-size: 17px;
+  color: var(--texte-secondaire);
+}
+
+.lien-agenda {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vert-fonce);
+}
+
+.lien-agenda i {
+  transition: transform 0.3s var(--courbe);
+}
+
+.lien-agenda:hover i {
+  transform: translateX(4px);
+}
+
+/* ===== Filtres ===== */
+.filtres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+  padding-bottom: var(--espace-5);
+  margin-bottom: var(--espace-5);
+  border-bottom: 1px solid var(--bordure);
+}
+
+.filtre {
+  padding: 10px 20px;
+  font-family: var(--police-texte);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vert-fonce);
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.filtre:hover:not(.actif) {
+  background: var(--vert-clair);
+  border-color: var(--vert);
+}
+
+.filtre.actif {
+  color: var(--texte);
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+/* ===== Liste des événements ===== */
+.liste {
+  display: grid;
+  gap: var(--espace-4);
+}
+
+.carte {
+  position: relative;
+  display: grid;
+  grid-template-columns: 140px 200px 1fr auto;
+  align-items: center;
+  gap: var(--espace-6);
+  padding: var(--espace-4) var(--espace-5);
+  color: var(--texte);
+  background: var(--ivoire);
+  border: 1px solid var(--bordure);
+  border-radius: 16px;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.carte:hover,
+.carte:focus-visible {
+  background: var(--vert-clair);
+  border-color: var(--dore);
+  box-shadow: 0 0 0 3px rgba(212, 163, 89, 0.2), 0 12px 30px rgba(9, 63, 48, 0.08);
+  text-decoration: none;
+}
+
+/* ----- Date ----- */
+.date {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espace-2);
+}
+
+.jour {
+  font-family: var(--police-titre);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--vert-fonce);
+}
+
+.mois {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texte-secondaire);
+}
+
+/* ----- Vignette ----- */
+.visuel {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--vert-clair);
+}
+
+.visuel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--courbe);
+}
+
+.carte:hover .visuel img,
+.carte:focus-visible .visuel img {
+  transform: scale(1.05);
+}
+
+.sans-image {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--vert-clair), var(--dore-clair));
+}
+
+/* Badge d'état avec point qui pulse */
+.statut {
+  position: absolute;
+  left: var(--espace-2);
+  bottom: var(--espace-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blanc);
+  background: var(--vert);
+  border-radius: 999px;
+}
+
+.statut.a-venir {
+  background: var(--orange-fonce);
+}
+
+.statut.en-cours {
+  background: var(--vert);
+}
+
+.statut::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--blanc);
+  border-radius: 50%;
+  animation: pulse 1.8s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.75);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* ----- Informations ----- */
+.meta {
+  margin: 0 0 var(--espace-2);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-fonce);
+}
+
+.infos h3 {
+  margin: 0 0 var(--espace-2);
+  font-family: var(--police-titre);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--vert-fonce);
+}
+
+.lieu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 14px;
+  color: var(--texte-secondaire);
+}
+
+/* ----- Bouton rond ----- */
+.bouton {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  color: var(--vert);
+  background: transparent;
+  border: 1px solid var(--vert);
+  border-radius: 50%;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.bouton i {
+  transition: transform 0.3s var(--courbe);
+}
+
+.carte:hover .bouton,
+.carte:focus-visible .bouton {
+  color: var(--blanc);
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.carte:hover .bouton i,
+.carte:focus-visible .bouton i {
+  transform: translateX(4px);
+}
+
+.vide {
+  margin: 0;
+  padding: var(--espace-6);
+  text-align: center;
+  color: var(--texte-secondaire);
+  background: var(--ivoire);
+  border-radius: 16px;
+}
+
+/* ===== Animation d'apparition au défilement ===== */
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(var(--decalage, 30px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rdv:not(.visible) .entete,
+.rdv:not(.visible) .filtres,
+.rdv:not(.visible) .carte {
+  opacity: 0;
+}
+
+/* Étape 1 : l'en-tête et les filtres */
+.visible .entete,
+.visible .filtres {
+  --decalage: 30px;
+  animation: apparition 0.5s var(--courbe) backwards;
+}
+
+/* Étape 2 : les lignes, l'une après l'autre (0,12 s d'écart) */
+.visible .carte {
+  --decalage: 30px;
+  animation: apparition 0.6s var(--courbe) backwards;
+  animation-delay: calc(0.3s + var(--i) * 0.12s);
+}
+
+/* ===== Tablette ===== */
+@media (max-width: 1023px) {
+  .entete {
+    grid-template-columns: 1fr;
+    gap: var(--espace-5);
+  }
+
+  .intro {
+    border-left: none;
+    border-top: 1px solid var(--dore);
+    padding: var(--espace-4) 0 0;
+  }
+
+  .carte {
+    grid-template-columns: 110px 170px 1fr auto;
+    gap: var(--espace-4);
+  }
+
+  .jour {
+    font-size: 40px;
+  }
+
+  .infos h3 {
+    font-size: 24px;
+  }
+}
+
+/* ===== Mobile : carte verticale ===== */
+@media (max-width: 767px) {
+  .rdv {
+    padding: var(--espace-7) 0;
+  }
+
+  .ligne {
+    white-space: normal;
+  }
+
+  /* Les filtres défilent horizontalement au lieu de passer à la ligne */
+  .filtres {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .filtres::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filtre {
+    flex: 0 0 auto;
+  }
+
+  .carte {
+    grid-template-columns: 1fr;
+    gap: var(--espace-4);
+    padding: var(--espace-5);
+  }
+
+  .visuel {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .bouton {
+    position: absolute;
+    top: var(--espace-5);
+    right: var(--espace-5);
+    width: 44px;
+    height: 44px;
+  }
+
+  .infos h3 {
+    font-size: 24px;
+  }
+}
+
+/* ===== Accessibilité : mouvement réduit ===== */
+@media (prefers-reduced-motion: reduce) {
+  .rdv:not(.visible) .entete,
+  .rdv:not(.visible) .filtres,
+  .rdv:not(.visible) .carte {
+    opacity: 1;
+  }
+
+  .visible .entete,
+  .visible .filtres,
+  .visible .carte {
+    animation: none;
+  }
+
+  .statut::before {
+    animation: none;
+  }
+
+  .carte,
+  .visuel img,
+  .bouton,
+  .bouton i,
+  .filtre,
+  .lien-agenda i {
+    transition: none;
+  }
+}

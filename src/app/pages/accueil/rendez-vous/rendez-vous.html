@@ -1,0 +1,71 @@
+<section class="rdv" [class.visible]="visible()">
+  <div class="contenu">
+
+    <header class="entete">
+      <div class="bloc-titre">
+        <p class="sur-titre">À vivre prochainement</p>
+        <h2>
+          <span class="ligne">La culture se vit.</span>
+          <em class="ligne">Venez la célébrer.</em>
+        </h2>
+      </div>
+
+      <div class="intro">
+        <p class="etiquette">Agenda</p>
+        <p class="description">
+          Festivals, expositions et traditions : trois rendez-vous pour vibrer
+          au rythme de la Côte d'Ivoire.
+        </p>
+        <a routerLink="/evenements" class="lien-agenda">
+          Voir tout l'agenda <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </header>
+
+    <div class="filtres" role="group" aria-label="Filtrer les événements par type">
+      @for (f of filtres; track f.valeur) {
+        <button type="button" class="filtre"
+                [class.actif]="filtreActif() === f.valeur"
+                [attr.aria-pressed]="filtreActif() === f.valeur"
+                (click)="choisir(f.valeur)">
+          {{ f.libelle }}
+        </button>
+      }
+    </div>
+
+    <div class="liste">
+      @for (e of liste(); track e.evenement.id; let i = $index) {
+        <a class="carte" [style.--i]="i" [routerLink]="['/evenements', e.evenement.slug]">
+
+          <div class="date">
+            <span class="jour">{{ e.jour }}</span>
+            <span class="mois">{{ e.mois }}</span>
+          </div>
+
+          <div class="visuel">
+            @if (e.evenement.image) {
+              <img [src]="e.evenement.image" [alt]="e.evenement.imageAlt" loading="lazy">
+            } @else {
+              <span class="sans-image"></span>
+            }
+            <span class="statut" [class.a-venir]="e.evenement.statutEvenement === 'a-venir'"
+                  [class.en-cours]="e.evenement.statutEvenement === 'en-cours'">
+              {{ e.statut }}
+            </span>
+          </div>
+
+          <div class="infos">
+            <p class="meta">{{ e.type }} · {{ e.evenement.ville }}</p>
+            <h3>{{ e.evenement.nom }}</h3>
+            <p class="lieu"><i class="bi bi-map"></i> {{ e.zone }}</p>
+          </div>
+
+          <span class="bouton" aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+        </a>
+      } @empty {
+        <p class="vide">Aucun événement de ce type pour le moment.</p>
+      }
+    </div>
+
+  </div>
+</section>

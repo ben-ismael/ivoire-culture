@@ -1,0 +1,45 @@
+/* ===== Reset minimal ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ===== Base du site ===== */
+body {
+  margin: 0;
+  background: var(--blanc);
+  color: var(--texte);
+  font-family: var(--police-texte);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ===== Titres ===== */
+h1,
+h2 {
+  font-family: var(--police-titre);
+  color: var(--vert-fonce);
+}
+
+h3 {
+  font-family: var(--police-texte);
+  font-weight: 600;
+  color: var(--vert-fonce);
+}
+
+/* ===== Liens ===== */
+a {
+  color: var(--vert);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Accessibilité : focus clavier ===== */
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}

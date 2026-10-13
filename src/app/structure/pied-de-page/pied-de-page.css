@@ -1,0 +1,326 @@
+:host {
+  display: block;
+  --courbe: cubic-bezier(0.16, 1, 0.3, 1);
+  --fond-champ: #022217;
+  --texte-doux: #A3C2B5;
+}
+
+.pied {
+  background: var(--vert-fonce);
+  border-top: 1px solid rgba(212, 163, 89, 0.2);
+  color: var(--texte-doux);
+  padding: var(--espace-8) 0 var(--espace-5);
+}
+
+.interieur {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 0 var(--espace-5);
+}
+
+/* ===== Colonnes ===== */
+.colonnes {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
+  gap: var(--espace-7);
+  padding-bottom: var(--espace-7);
+}
+
+.colonne h4 {
+  margin: 0 0 var(--espace-5);
+  font-family: var(--police-texte);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #D4A359;
+}
+
+.colonne ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--espace-3);
+}
+
+/* Liens : blanc brillant et glissade vers la droite au survol */
+.colonne li a {
+  display: inline-block;
+  font-size: 15px;
+  color: var(--texte-doux);
+  transition: color 0.25s, transform 0.3s var(--courbe);
+}
+
+.colonne li a:hover,
+.colonne li a:focus-visible {
+  color: var(--blanc);
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+/* ===== Marque ===== */
+.logo {
+  display: inline-block;
+  font-family: var(--police-titre);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--blanc);
+}
+
+.logo:hover {
+  text-decoration: none;
+}
+
+.presentation {
+  margin: var(--espace-4) 0 var(--espace-5);
+  max-width: 340px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.reseaux {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+}
+
+.puce {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  color: var(--blanc);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: background 0.3s, transform 0.3s var(--courbe);
+}
+
+.puce:hover,
+.puce:focus-visible {
+  background: var(--orange);
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+/* ===== Newsletter ===== */
+.texte-newsletter {
+  margin: 0 0 var(--espace-4);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.champ {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: var(--fond-champ);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.champ:focus-within {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange);
+}
+
+.champ input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px var(--espace-4);
+  font-family: var(--police-texte);
+  font-size: 15px;
+  color: var(--blanc);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.champ input::placeholder {
+  color: var(--texte-doux);
+  opacity: 0.8;
+}
+
+.champ button {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  color: var(--blanc);
+  background: var(--orange);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.champ button i {
+  transition: transform 0.3s var(--courbe);
+}
+
+.champ button:hover {
+  background: var(--orange-fonce);
+}
+
+.champ button:hover i,
+.champ button:focus-visible i {
+  transform: translateX(4px);
+}
+
+.reassurance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: var(--espace-3) 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.confirmation {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-2);
+  margin: 0;
+  padding: var(--espace-3) var(--espace-4);
+  font-size: 15px;
+  color: var(--blanc);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.confirmation i {
+  color: #7fd6a4;
+}
+
+/* ===== Barre inférieure ===== */
+.barre-basse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-5);
+  flex-wrap: wrap;
+  padding-top: var(--espace-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+}
+
+.copyright {
+  margin: 0;
+}
+
+.legal {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--espace-2) var(--espace-3);
+}
+
+.legal a {
+  color: var(--texte-doux);
+  transition: color 0.25s;
+}
+
+.legal a:hover {
+  color: var(--blanc);
+  text-decoration: none;
+}
+
+.retour {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  padding: 8px 16px;
+  font-family: var(--police-texte);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--texte-doux);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+}
+
+.retour i {
+  transition: transform 0.3s var(--courbe);
+}
+
+.retour:hover,
+.retour:focus-visible {
+  color: var(--blanc);
+  border-color: #D4A359;
+  background: rgba(212, 163, 89, 0.12);
+}
+
+.retour:hover i {
+  transform: translateY(-3px);
+}
+
+/* ===== Apparition au scroll (fade-in-up) ===== */
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.pied:not(.visible) .interieur {
+  opacity: 0;
+}
+
+.visible .interieur {
+  animation: apparition 0.7s var(--courbe) backwards;
+}
+
+/* ===== Tablette : 2 colonnes ===== */
+@media (max-width: 1023px) {
+  .colonnes {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espace-7) var(--espace-6);
+  }
+}
+
+/* ===== Mobile : 1 colonne ===== */
+@media (max-width: 767px) {
+  .pied {
+    padding-top: var(--espace-7);
+  }
+
+  .colonnes {
+    grid-template-columns: 1fr;
+    gap: var(--espace-6);
+    padding-bottom: var(--espace-6);
+  }
+
+  .barre-basse {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espace-4);
+  }
+}
+
+/* ===== Accessibilité : mouvement réduit ===== */
+@media (prefers-reduced-motion: reduce) {
+  .pied:not(.visible) .interieur {
+    opacity: 1;
+  }
+
+  .visible .interieur {
+    animation: none;
+  }
+
+  .colonne li a,
+  .puce,
+  .champ button i,
+  .retour i {
+    transition: none;
+  }
+}

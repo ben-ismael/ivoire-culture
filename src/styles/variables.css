@@ -1,0 +1,51 @@
+:root {
+  /* Vert (primary) */
+  --vert: #0F5B43;
+  --vert-fonce: #093F30;
+  --vert-clair: #DDEDE6;
+
+  /* Orange (secondary) */
+  --orange: #E87524;
+  --orange-fonce: #C95D15;
+  --orange-clair: #FCE3D2;
+
+  /* Doré (patrimoine, avec parcimonie) */
+  --dore: #C99A3D;
+  --dore-clair: #F4E7C8;
+
+  /* Neutres */
+  --ivoire: #F8F4EA;
+  --blanc: #FFFFFF;
+  --texte: #202522;
+  --texte-secondaire: #66706B;
+  --bordure: #DDE2DE;
+
+  /* États */
+  --succes: #2E7D32;
+  --alerte: #A15C00;
+  --erreur: #B42318;
+  --information: #2F6F8F;
+
+  /* Polices */
+  --police-titre: 'Playfair Display', serif;
+  --police-texte: 'Inter', sans-serif;
+
+  /* Espacements */
+  --espace-1: 4px;
+  --espace-2: 8px;
+  --espace-3: 12px;
+  --espace-4: 16px;
+  --espace-5: 24px;
+  --espace-6: 32px;
+  --espace-7: 48px;
+  --espace-8: 64px;
+
+  /* Rayons */
+  --rayon-petit: 8px;
+  --rayon-moyen: 12px;
+  --rayon-grand: 16px;
+
+  /* Ombre et conteneur */
+  --ombre-douce: 0 8px 25px rgba(15, 91, 67, 0.08);
+  --largeur-max: 1200px;
+}
