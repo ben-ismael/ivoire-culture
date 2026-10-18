@@ -1,0 +1,118 @@
+<div class="page">
+
+  <header class="hero">
+    <div class="contenu">
+      <app-fil-ariane [niveaux]="fil" />
+      <p class="sur-titre">Explorer le territoire</p>
+      <h1>Les régions de <em>Côte d'Ivoire</em></h1>
+      <p class="sous-titre">
+        Découvrez les identités, les traditions et les patrimoines qui façonnent chaque territoire.
+      </p>
+      @if (etat() === 'ok') {
+        <p class="compteur"><strong>{{ territoires().length }}</strong> territoires</p>
+      }
+    </div>
+  </header>
+
+  <section class="corps">
+    <div class="contenu">
+
+      <div class="outils">
+        <div class="recherche">
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <input #champ type="search" autocomplete="off"
+                 placeholder="Rechercher une région, une ville, un département..."
+                 aria-label="Rechercher un territoire"
+                 [value]="recherche()" (input)="saisir($event)">
+          @if (recherche()) {
+            <button type="button" class="effacer" aria-label="Effacer la recherche" (click)="viderRecherche()">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          }
+        </div>
+
+        <div class="selecteur">
+          <select aria-label="Filtrer par district" (change)="choisirDistrict($event)">
+            <option value="" [selected]="!district()">Tous les districts</option>
+            @for (d of districts(); track d) {
+              <option [value]="d" [selected]="district() === d">{{ d }}</option>
+            }
+            <optgroup label="Districts autonomes">
+              @for (d of autonomes(); track d) {
+                <option [value]="d" [selected]="district() === d">{{ d }}</option>
+              }
+            </optgroup>
+          </select>
+        </div>
+
+        @if (actif()) {
+          <button type="button" class="reinitialiser" (click)="reinitialiser()">Réinitialiser</button>
+        }
+
+        @if (etat() === 'ok' && actif()) {
+          <p class="resultat" aria-live="polite">
+            {{ filtres().length }} territoire{{ filtres().length > 1 ? 's' : '' }}
+            sur {{ territoires().length }}
+          </p>
+        }
+      </div>
+
+      @switch (etat()) {
+        @case ('chargement') {
+          <div aria-busy="true" aria-label="Chargement des territoires">
+            @for (s of squelettes; track $index) {
+              <div class="squelette"></div>
+            }
+          </div>
+        }
+
+        @case ('erreur') {
+          <div class="etat" role="alert">
+            <h2>Impossible de charger les régions</h2>
+            <p>Vérifiez votre connexion, puis réessayez.</p>
+            <button type="button" class="bouton-etat" (click)="charger()">Réessayer</button>
+          </div>
+        }
+
+        @default {
+          @if (groupes().length) {
+            <div class="liste">
+              @for (g of groupes(); track g.titre) {
+                <section class="groupe">
+                  <h2 class="titre-groupe">
+                    {{ g.titre }} <span class="nb">{{ g.territoires.length }}</span>
+                  </h2>
+                  <ul>
+                    @for (t of g.territoires; track t.slug; let i = $index) {
+                      <li [style.--i]="g.base + i">
+                        <button type="button" class="ligne"
+                                [class.actif]="selection() === t.slug"
+                                [attr.aria-label]="t.nom + ', chef-lieu ' + t.chefLieu"
+                                (click)="choisir(t, $event)">
+                          <span class="nom">{{ t.nom }}</span>
+                          <span class="points" aria-hidden="true"></span>
+                          <span class="chef">{{ t.chefLieu }}</span>
+                        </button>
+                      </li>
+                    }
+                  </ul>
+                </section>
+              }
+            </div>
+          } @else {
+            <div class="etat">
+              <h2>Aucun territoire ne correspond à votre recherche</h2>
+              <p>Essayez un autre nom, ou affichez tous les districts.</p>
+              <button type="button" class="bouton-etat" (click)="reinitialiser()">Réinitialiser</button>
+            </div>
+          }
+        }
+      }
+
+    </div>
+  </section>
+
+  @if (selectionne(); as t) {
+    <app-panneau-territoire [territoire]="t" (fermer)="fermer()" />
+  }
+</div>

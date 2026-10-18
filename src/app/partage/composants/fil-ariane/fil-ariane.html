@@ -1,0 +1,13 @@
+<nav class="fil" aria-label="Fil d'Ariane">
+  <ol>
+    @for (n of niveaux(); track n.libelle; let dernier = $last) {
+      <li>
+        @if (n.lien && !dernier) {
+          <a [routerLink]="n.lien">{{ n.libelle }}</a>
+        } @else {
+          <span [attr.aria-current]="dernier ? 'page' : null">{{ n.libelle }}</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

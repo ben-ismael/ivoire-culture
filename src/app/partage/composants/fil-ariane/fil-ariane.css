@@ -1,0 +1,31 @@
+.fil ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--texte-secondaire);
+}
+
+.fil li + li::before {
+  content: '›';
+  margin-right: 8px;
+  color: var(--dore);
+}
+
+.fil a {
+  color: var(--texte-secondaire);
+}
+
+.fil a:hover {
+  color: var(--vert);
+  text-decoration: underline;
+}
+
+.fil [aria-current] {
+  font-weight: 600;
+  color: var(--vert-fonce);
+}

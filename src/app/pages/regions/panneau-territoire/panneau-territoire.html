@@ -1,0 +1,47 @@
+<aside class="panneau" #racine tabindex="-1" role="dialog" aria-modal="false"
+       [attr.aria-labelledby]="'titre-' + territoire().slug">
+
+  <button type="button" class="fermer" aria-label="Fermer le panneau" (click)="fermer.emit()">
+    <i class="bi bi-x-lg"></i>
+  </button>
+
+  <p class="type">
+    @if (territoire().type === 'region') {
+      Région · District {{ territoire().district }}
+    } @else {
+      District autonome
+    }
+  </p>
+
+  <h2 [id]="'titre-' + territoire().slug">{{ territoire().nom }}</h2>
+
+  <dl class="infos">
+    <div>
+      <dt>Chef-lieu</dt>
+      <dd>{{ territoire().chefLieu }}</dd>
+    </div>
+    @if (territoire().villePhare && territoire().villePhare !== territoire().chefLieu) {
+      <div>
+        <dt>Ville phare</dt>
+        <dd>{{ territoire().villePhare }}</dd>
+      </div>
+    }
+  </dl>
+
+  @if (territoire().accroche) {
+    <p class="accroche">{{ territoire().accroche }}</p>
+  }
+
+  <h3 class="sous-titre">{{ libelleDeps() }}</h3>
+  <ul class="pastilles">
+    @for (d of territoire().departements; track d) {
+      <li>{{ d }}</li>
+    }
+  </ul>
+
+  @if (ficheDisponible()) {
+    <a class="bouton" [routerLink]="['/regions', territoire().slug]">
+      Explorer la région <i class="bi bi-arrow-right"></i>
+    </a>
+  }
+</aside>

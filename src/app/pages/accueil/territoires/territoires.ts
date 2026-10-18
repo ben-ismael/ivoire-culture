@@ -1,6 +1,7 @@
 import { Component, ElementRef, afterNextRender, effect, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 import { RegionService } from '../../../noyau/services/region';
 
@@ -15,7 +16,11 @@ export class Territoires {
   private hote = inject(ElementRef<HTMLElement>);
   private piste = viewChild<ElementRef<HTMLElement>>('piste');
 
-  regions = toSignal(this.regionService.getRegions(), { initialValue: [] });
+  // Les régions à la une, dont la fiche est publiée
+  regions = toSignal(
+    this.regionService.getRegions().pipe(map(liste => liste.filter(r => r.misEnAvant))),
+    { initialValue: [] }
+  );
 
   visible = signal(false);      // déclenche l'animation d'apparition
   progression = signal(0);      // largeur de la barre dorée (en %)

@@ -7,7 +7,8 @@ export const routes: Routes = [
     path: '',
     component: MiseEnPagePublique,
     children: [
-      { path: '', component: Accueil }
+      { path: '', component: Accueil },
+      { path: 'regions', loadComponent: () => import('./pages/regions/regions').then(m => m.Regions) }
     ]
   }
 ];

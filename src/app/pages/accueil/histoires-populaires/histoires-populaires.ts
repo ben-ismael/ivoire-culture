@@ -16,7 +16,7 @@ export class HistoiresPopulaires {
   private hote = inject(ElementRef<HTMLElement>);
 
   private contenus = toSignal(inject(ContenuService).getContenusMisEnAvant(), { initialValue: [] });
-  private regions = toSignal(inject(RegionService).getRegions(), { initialValue: [] });
+  private regions = toSignal(inject(RegionService).getTerritoires(), { initialValue: [] });
   private categories = toSignal(inject(CategorieService).getCategories(), { initialValue: [] });
 
   visible = signal(false);

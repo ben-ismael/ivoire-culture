@@ -11,8 +11,14 @@ export class RegionService {
   private http = inject(HttpClient);
   private url = 'donnees/regions.json';
 
+  // Les 33 territoires, avec ou sans fiche publiée (carte et liste)
+  getTerritoires(): Observable<Region[]> {
+    return this.http.get<Region[]>(this.url);
+  }
+
+  // Seulement les territoires dont la fiche est publiée
   getRegions(): Observable<Region[]> {
-    return this.http.get<Region[]>(this.url).pipe(
+    return this.getTerritoires().pipe(
       map(regions => regions.filter(r => r.statut === 'publie'))
     );
   }

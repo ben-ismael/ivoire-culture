@@ -47,8 +47,8 @@
             <span class="bouton-carte"><i class="bi bi-arrow-right"></i></span>
 
             <div class="bloc-texte">
-              <span class="badge">{{ region.zone }}</span>
-              <h3>{{ region.nom }}</h3>
+              <span class="badge">{{ region.type === 'region' ? region.nom : 'District autonome' }}</span>
+              <h3>{{ region.villePhare || region.nom }}</h3>
               <div class="description">
                 <div class="description-interieur">
                   <p>{{ region.accroche }}</p>

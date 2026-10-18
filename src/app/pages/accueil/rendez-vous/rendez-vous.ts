@@ -33,7 +33,7 @@ export class RendezVous {
   private hote = inject(ElementRef<HTMLElement>);
 
   private evenements = toSignal(inject(EvenementService).getEvenementsProchains(), { initialValue: [] });
-  private regions = toSignal(inject(RegionService).getRegions(), { initialValue: [] });
+  private regions = toSignal(inject(RegionService).getTerritoires(), { initialValue: [] });
 
   visible = signal(false);
 
@@ -59,7 +59,7 @@ export class RendezVous {
         mois: MOIS[parseInt(e.dateDebut.slice(5, 7), 10) - 1],
         type: TYPES[e.typeEvenement],
         statut: STATUTS[e.statutEvenement],
-        zone: this.regions().find(r => r.slug === e.regionSlug)?.zone ?? ''
+        zone: this.regions().find(r => r.slug === e.regionSlug)?.nom ?? ''
       }));
   });
 
