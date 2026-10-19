@@ -1,0 +1,280 @@
+:host {
+  display: block;
+}
+
+.carte {
+  position: relative;
+  aspect-ratio: 1000 / 1057;
+  width: min(100%, calc((100vh - 150px) * 0.946));
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: 20px;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y; /* un doigt : la page défile ; deux doigts : on zoome la carte */
+  outline: none;
+}
+
+.svg:active {
+  cursor: grabbing;
+}
+
+.svg:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: -4px;
+}
+
+/* ===== Territoires ===== */
+.forme {
+  fill: var(--teinte, #ddede6);
+  stroke: #ffffff;
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  outline: none;
+  transition: fill 0.25s, opacity 0.25s;
+}
+
+.forme.survole {
+  fill: var(--dore);
+}
+
+.forme.selectionne {
+  fill: var(--vert-fonce);
+}
+
+.forme.estompe {
+  opacity: 0.25;
+}
+
+.forme:focus-visible {
+  stroke: var(--orange);
+  stroke-width: 3px;
+}
+
+/* ===== Textes de la carte ===== */
+.nom-region,
+.nom-chef,
+.nom-marqueur {
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-linejoin: round;
+  paint-order: stroke;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.nom-region {
+  font-family: var(--police-titre);
+  font-weight: 700;
+  fill: var(--vert-fonce);
+  text-anchor: middle;
+}
+
+.nom-chef {
+  font-family: var(--police-texte);
+  font-weight: 500;
+  fill: var(--texte);
+}
+
+.nom-marqueur {
+  font-family: var(--police-titre);
+  font-weight: 700;
+  fill: var(--vert-fonce);
+}
+
+.nom-region.blanc,
+.nom-chef.blanc {
+  fill: #ffffff;
+  stroke: transparent;
+}
+
+.point {
+  fill: var(--orange);
+  stroke: #ffffff;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.estompe.nom-region,
+.estompe.nom-chef,
+.estompe.point {
+  opacity: 0.25;
+}
+
+/* ===== Marqueurs d'Abidjan et de Yamoussoukro ===== */
+.marqueur {
+  cursor: pointer;
+  transition: opacity 0.25s;
+}
+
+.marqueur.estompe {
+  opacity: 0.25;
+}
+
+.zone-clic {
+  fill: transparent;
+  pointer-events: all;
+}
+
+.anneau {
+  fill: rgba(255, 255, 255, 0.92);
+  stroke: var(--orange);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+  transition: fill 0.25s, stroke 0.25s;
+}
+
+.coeur {
+  fill: var(--orange);
+  transition: fill 0.25s;
+}
+
+.marqueur.survole .anneau {
+  fill: var(--dore);
+}
+
+.marqueur.selectionne .anneau {
+  fill: var(--vert-fonce);
+  stroke: var(--vert-fonce);
+}
+
+.marqueur.selectionne .coeur {
+  fill: #ffffff;
+}
+
+/* ===== Commandes de zoom ===== */
+.commandes {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.commandes button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  color: var(--vert-fonce);
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(9, 63, 48, 0.1);
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.commandes button:hover:not(:disabled) {
+  color: var(--blanc);
+  background: var(--vert);
+  border-color: var(--vert);
+}
+
+.commandes button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ===== Info-bulle ===== */
+.bulle {
+  position: absolute;
+  z-index: 10;
+  width: 264px;
+  padding: 14px 16px;
+  pointer-events: none;
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(9, 63, 48, 0.18);
+}
+
+.bulle p {
+  margin: 0;
+}
+
+.bulle-type {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange-fonce);
+}
+
+.bulle-nom {
+  margin: 2px 0 8px !important;
+  font-family: var(--police-titre);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--vert-fonce);
+}
+
+.bulle-ligne {
+  font-size: 14px;
+}
+
+.bulle-ligne span {
+  display: inline-block;
+  min-width: 70px;
+  color: var(--texte-secondaire);
+}
+
+.bulle-deps {
+  margin-top: 8px !important;
+  padding-top: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--texte-secondaire);
+  border-top: 1px solid var(--bordure);
+}
+
+.bulle-deps em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--vert);
+}
+
+/* ===== Source ===== */
+.source {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--texte-secondaire);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 1023px) {
+  .carte {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forme,
+  .marqueur,
+  .anneau,
+  .coeur,
+  .nom-region,
+  .nom-chef,
+  .nom-marqueur,
+  .point,
+  .commandes button {
+    transition: none;
+  }
+}

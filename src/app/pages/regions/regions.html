@@ -57,62 +57,93 @@
         }
       </div>
 
-      @switch (etat()) {
-        @case ('chargement') {
-          <div aria-busy="true" aria-label="Chargement des territoires">
-            @for (s of squelettes; track $index) {
-              <div class="squelette"></div>
-            }
-          </div>
-        }
+      <div class="disposition">
 
-        @case ('erreur') {
-          <div class="etat" role="alert">
-            <h2>Impossible de charger les régions</h2>
-            <p>Vérifiez votre connexion, puis réessayez.</p>
-            <button type="button" class="bouton-etat" (click)="charger()">Réessayer</button>
-          </div>
-        }
-
-        @default {
-          @if (groupes().length) {
-            <div class="liste">
-              @for (g of groupes(); track g.titre) {
-                <section class="groupe">
-                  <h2 class="titre-groupe">
-                    {{ g.titre }} <span class="nb">{{ g.territoires.length }}</span>
-                  </h2>
-                  <ul>
-                    @for (t of g.territoires; track t.slug; let i = $index) {
-                      <li [style.--i]="g.base + i">
-                        <button type="button" class="ligne"
-                                [class.actif]="selection() === t.slug"
-                                [attr.aria-label]="t.nom + ', chef-lieu ' + t.chefLieu"
-                                (click)="choisir(t, $event)">
-                          <span class="nom">{{ t.nom }}</span>
-                          <span class="points" aria-hidden="true"></span>
-                          <span class="chef">{{ t.chefLieu }}</span>
-                        </button>
-                      </li>
-                    }
-                  </ul>
-                </section>
-              }
+        <!-- Colonne de la carte (collée en haut sur ordinateur) -->
+        <div class="zone-carte">
+          @if (carteEtat() === 'erreur') {
+            <div class="carte-attente carte-erreur" role="alert">
+              <p>Impossible de charger la carte.</p>
+              <button type="button" class="bouton-etat" (click)="chargerCarte()">Réessayer</button>
             </div>
+          } @else if (carte() && etat() === 'ok') {
+            <app-carte-regions
+              [carte]="carte()!"
+              [territoires]="territoires()"
+              [visibles]="visibles()"
+              [selection]="selection()"
+              [(survol)]="survol"
+              (choisir)="choisirSurCarte($event)" />
           } @else {
-            <div class="etat">
-              <h2>Aucun territoire ne correspond à votre recherche</h2>
-              <p>Essayez un autre nom, ou affichez tous les districts.</p>
-              <button type="button" class="bouton-etat" (click)="reinitialiser()">Réinitialiser</button>
-            </div>
+            <div class="carte-attente" aria-busy="true" aria-label="Chargement de la carte"></div>
           }
-        }
-      }
 
+          @if (selectionne(); as t) {
+            <app-panneau-territoire [territoire]="t" (fermer)="fermer()" />
+          }
+        </div>
+
+        <!-- Colonne de la liste -->
+        <div class="colonne-liste">
+          @switch (etat()) {
+            @case ('chargement') {
+              <div aria-busy="true" aria-label="Chargement des territoires">
+                @for (s of squelettes; track $index) {
+                  <div class="squelette"></div>
+                }
+              </div>
+            }
+
+            @case ('erreur') {
+              <div class="etat" role="alert">
+                <h2>Impossible de charger les régions</h2>
+                <p>Vérifiez votre connexion, puis réessayez.</p>
+                <button type="button" class="bouton-etat" (click)="charger()">Réessayer</button>
+              </div>
+            }
+
+            @default {
+              @if (groupes().length) {
+                <div class="liste">
+                  @for (g of groupes(); track g.titre) {
+                    <section class="groupe">
+                      <h2 class="titre-groupe">
+                        {{ g.titre }} <span class="nb">{{ g.territoires.length }}</span>
+                      </h2>
+                      <ul>
+                        @for (t of g.territoires; track t.slug; let i = $index) {
+                          <li [style.--i]="g.base + i">
+                            <button type="button" class="ligne"
+                                    [class.actif]="selection() === t.slug"
+                                    [class.survole]="survol() === t.slug"
+                                    [attr.aria-label]="t.nom + ', chef-lieu ' + t.chefLieu"
+                                    (click)="choisir(t, $event)"
+                                    (mouseenter)="survol.set(t.slug)"
+                                    (mouseleave)="survol.set(null)"
+                                    (focus)="survol.set(t.slug)"
+                                    (blur)="survol.set(null)">
+                              <span class="nom">{{ t.nom }}</span>
+                              <span class="points" aria-hidden="true"></span>
+                              <span class="chef">{{ t.chefLieu }}</span>
+                            </button>
+                          </li>
+                        }
+                      </ul>
+                    </section>
+                  }
+                </div>
+              } @else {
+                <div class="etat">
+                  <h2>Aucun territoire ne correspond à votre recherche</h2>
+                  <p>Essayez un autre nom, ou affichez tous les districts.</p>
+                  <button type="button" class="bouton-etat" (click)="reinitialiser()">Réinitialiser</button>
+                </div>
+              }
+            }
+          }
+        </div>
+
+      </div>
     </div>
   </section>
-
-  @if (selectionne(); as t) {
-    <app-panneau-territoire [territoire]="t" (fermer)="fermer()" />
-  }
 </div>

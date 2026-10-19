@@ -1,7 +1,6 @@
 :host {
   display: block;
   --courbe: cubic-bezier(0.16, 1, 0.3, 1);
-  --colonnes: 2; /* étape 3 (carte) : passer à 1 */
 }
 
 .page {
@@ -180,14 +179,48 @@ h1 em {
   color: var(--texte-secondaire);
 }
 
-/* ===== Liste regroupée par district ===== */
-.liste {
-  columns: var(--colonnes);
-  column-gap: var(--espace-8);
+/* ===== Disposition : carte à gauche, liste à droite ===== */
+.disposition {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--espace-7);
+  align-items: start;
 }
 
+.zone-carte {
+  position: sticky;
+  top: 96px;
+}
+
+.carte-attente {
+  aspect-ratio: 1000 / 1057;
+  width: min(100%, calc((100vh - 150px) * 0.946));
+  margin: 0 auto;
+  background: linear-gradient(90deg, var(--vert-clair), var(--dore-clair), var(--vert-clair));
+  background-size: 200% 100%;
+  border-radius: 20px;
+  opacity: 0.6;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.carte-erreur {
+  display: grid;
+  place-content: center;
+  gap: var(--espace-3);
+  text-align: center;
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  opacity: 1;
+  animation: none;
+}
+
+.carte-erreur p {
+  margin: 0;
+  color: var(--texte-secondaire);
+}
+
+/* ===== Liste regroupée par district ===== */
 .groupe {
-  break-inside: avoid;
   margin-bottom: var(--espace-6);
 }
 
@@ -236,7 +269,7 @@ h1 em {
 
 .nom {
   font-family: var(--police-titre);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 1.2;
   color: var(--vert-fonce);
@@ -257,9 +290,14 @@ h1 em {
 
 .ligne:hover .nom,
 .ligne:focus-visible .nom,
+.ligne.survole .nom,
 .ligne.actif .nom {
   color: var(--vert);
   transform: translateX(4px);
+}
+
+.ligne.survole {
+  background: var(--dore-clair);
 }
 
 .ligne.actif {
@@ -334,16 +372,27 @@ h1 em {
   animation: apparition 0.5s var(--courbe) 0.1s backwards;
 }
 
+.zone-carte {
+  --decalage: 20px;
+  animation: apparition 0.7s var(--courbe) 0.2s backwards;
+}
+
 .groupe li {
   --decalage: 16px;
   animation: apparition 0.5s var(--courbe) backwards;
-  animation-delay: calc(0.25s + min(var(--i, 0), 12) * 0.04s);
+  animation-delay: calc(0.3s + min(var(--i, 0), 12) * 0.04s);
 }
 
-/* ===== Tablette et mobile ===== */
+/* ===== Tablette et mobile : carte au-dessus, liste en dessous ===== */
 @media (max-width: 1023px) {
-  :host {
-    --colonnes: 1;
+  .disposition {
+    grid-template-columns: 1fr;
+    gap: var(--espace-6);
+  }
+
+  .zone-carte {
+    position: relative;
+    top: auto;
   }
 }
 
@@ -369,8 +418,10 @@ h1 em {
 @media (prefers-reduced-motion: reduce) {
   .hero .contenu,
   .outils,
+  .zone-carte,
   .groupe li,
-  .squelette {
+  .squelette,
+  .carte-attente {
     animation: none;
   }
 

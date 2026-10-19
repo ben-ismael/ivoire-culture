@@ -1,0 +1,129 @@
+<div class="carte" #conteneur>
+  <svg #svg class="svg"
+       [attr.viewBox]="viewBox()"
+       preserveAspectRatio="xMidYMid meet"
+       role="group"
+       aria-label="Carte interactive des 33 territoires de Côte d'Ivoire. La liste à côté contient les mêmes informations. Flèches pour se déplacer, plus et moins pour zoomer, zéro pour recentrer."
+       tabindex="0"
+       (wheel)="molette($event)"
+       (dblclick)="doubleClic($event)"
+       (pointerdown)="pointeurBas($event)"
+       (pointermove)="pointeurMouvement($event)"
+       (pointerup)="pointeurHaut($event)"
+       (pointercancel)="pointeurHaut($event)"
+       (keydown)="clavier($event)">
+
+    <!-- Les 33 territoires -->
+    <g>
+      @for (f of formes(); track f.slug) {
+        <path class="forme"
+              [attr.d]="f.d"
+              [style.--teinte]="teinte(f)"
+              [class.survole]="survol() === f.slug"
+              [class.selectionne]="selection() === f.slug"
+              [class.estompe]="estompe(f.slug)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="libelle(f)"
+              [attr.aria-pressed]="selection() === f.slug"
+              (click)="clic(f)"
+              (keydown.enter)="activer(f, $event)"
+              (keydown.space)="activer(f, $event)"
+              (pointerenter)="entrer(f, $event)"
+              (pointermove)="bouger(f, $event)"
+              (pointerleave)="sortir()"
+              (focus)="focaliserForme(f)"
+              (blur)="sortir()" />
+      }
+    </g>
+
+    <!-- Noms des territoires et chefs-lieux (affichage progressif) -->
+    <g aria-hidden="true">
+      @for (l of etiquettes(); track l.f.slug) {
+        @if (l.nom) {
+          <text class="nom-region"
+                [class.blanc]="l.selectionne"
+                [class.estompe]="estompe(l.f.slug)"
+                [attr.x]="l.f.etiquette[0]"
+                [attr.y]="l.f.etiquette[1]"
+                [attr.font-size]="px(l.actif ? 14 : 12)"
+                [attr.stroke-width]="px(3)">{{ nomAffiche(l.f) }}</text>
+        }
+        @if (l.f.cheflieu && !l.autonome) {
+          <circle class="point"
+                  [class.estompe]="estompe(l.f.slug)"
+                  [attr.cx]="l.f.cheflieu.x"
+                  [attr.cy]="l.f.cheflieu.y"
+                  [attr.r]="px(3.2)" />
+          @if (l.chef) {
+            <text class="nom-chef"
+                  [class.blanc]="l.selectionne"
+                  [class.estompe]="estompe(l.f.slug)"
+                  [attr.x]="l.f.cheflieu.x + px(6)"
+                  [attr.y]="l.f.cheflieu.y + px(3.5)"
+                  [attr.font-size]="px(10.5)"
+                  [attr.stroke-width]="px(2.5)">{{ l.f.cheflieu.nom }}</text>
+          }
+        }
+      }
+    </g>
+
+    <!-- Marqueurs agrandis pour Abidjan et Yamoussoukro -->
+    <g>
+      @for (f of marqueurs(); track f.slug) {
+        <g class="marqueur"
+           [class.survole]="survol() === f.slug"
+           [class.selectionne]="selection() === f.slug"
+           [class.estompe]="estompe(f.slug)"
+           (click)="clic(f)"
+           (pointerenter)="entrer(f, $event)"
+           (pointermove)="bouger(f, $event)"
+           (pointerleave)="sortir()">
+          <circle class="zone-clic" [attr.cx]="f.cheflieu!.x" [attr.cy]="f.cheflieu!.y" [attr.r]="px(22)" />
+          <circle class="anneau" [attr.cx]="f.cheflieu!.x" [attr.cy]="f.cheflieu!.y" [attr.r]="px(11)" />
+          <circle class="coeur" [attr.cx]="f.cheflieu!.x" [attr.cy]="f.cheflieu!.y" [attr.r]="px(4.5)" />
+          <text class="nom-marqueur"
+                [attr.x]="f.cheflieu!.x + px(18)"
+                [attr.y]="f.cheflieu!.y + px(4)"
+                [attr.font-size]="px(12)"
+                [attr.stroke-width]="px(3)">{{ nomAffiche(f) }}</text>
+        </g>
+      }
+    </g>
+  </svg>
+
+  <!-- Commandes de zoom -->
+  <div class="commandes" role="group" aria-label="Commandes de la carte">
+    <button type="button" aria-label="Zoom avant" [disabled]="zoom() >= ZOOM_MAX - 0.01" (click)="zoomer(1)">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+    <button type="button" aria-label="Zoom arrière" [disabled]="zoom() <= ZOOM_MIN + 0.01" (click)="zoomer(-1)">
+      <i class="bi bi-dash-lg"></i>
+    </button>
+    <button type="button" aria-label="Recentrer la carte" [disabled]="zoom() <= ZOOM_MIN + 0.01" (click)="recentrer()">
+      <i class="bi bi-crosshair"></i>
+    </button>
+  </div>
+
+  <!-- Info-bulle au survol -->
+  @if (infoBulle(); as ib) {
+    <div class="bulle" role="tooltip" [style.left.px]="ib.x" [style.top.px]="ib.y">
+      <p class="bulle-type">
+        {{ ib.region.type === 'region' ? 'Région' : 'District autonome' }}
+      </p>
+      <p class="bulle-nom">{{ ib.region.nom }}</p>
+      <p class="bulle-ligne"><span>Chef-lieu</span> {{ ib.region.chefLieu }}</p>
+      @if (ib.region.type === 'region') {
+        <p class="bulle-ligne"><span>District</span> {{ ib.region.district }}</p>
+      }
+      <p class="bulle-deps">
+        {{ ib.deps }}@if (ib.reste) { <em> + {{ ib.reste }} autres</em> }
+      </p>
+    </div>
+  }
+</div>
+
+<p class="source">
+  Limites administratives : CNTIG / OCHA (HDX), licence CC BY-IGO.
+  Contours simplifiés, limites indicatives.
+</p>

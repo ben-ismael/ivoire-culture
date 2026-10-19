@@ -4,9 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { Region } from '../../noyau/modeles/region';
+import { Carte } from '../../noyau/modeles/carte';
 import { RegionService } from '../../noyau/services/region';
 import { FilAriane, Niveau } from '../../partage/composants/fil-ariane/fil-ariane';
 import { PanneauTerritoire } from './panneau-territoire/panneau-territoire';
+import { CarteRegions } from './carte-regions/carte-regions';
 
 // Ignore les majuscules, les accents, les tirets et les apostrophes
 function normaliser(texte: string): string {
@@ -21,7 +23,7 @@ function normaliser(texte: string): string {
 
 @Component({
   selector: 'app-regions',
-  imports: [FilAriane, PanneauTerritoire],
+  imports: [FilAriane, PanneauTerritoire, CarteRegions],
   templateUrl: './regions.html',
   styleUrl: './regions.css',
   host: { '(document:keydown.escape)': 'fermer()' }
@@ -38,6 +40,12 @@ export class Regions {
 
   etat = signal<'chargement' | 'ok' | 'erreur'>('chargement');
   territoires = signal<Region[]>([]);
+
+  carte = signal<Carte | null>(null);
+  carteEtat = signal<'chargement' | 'ok' | 'erreur'>('chargement');
+
+  // Territoire survolé : partagé entre la carte et la liste
+  survol = signal<string | null>(null);
 
   // L'état de la page est lu dans l'adresse (recherche partageable)
   recherche = signal(this.route.snapshot.queryParamMap.get('q') ?? '');
@@ -68,6 +76,9 @@ export class Regions {
       return champs.some(c => normaliser(c).includes(mot));
     });
   });
+
+  // Pour la carte : null quand aucun filtre n'est actif, sinon les territoires qui restent
+  visibles = computed(() => (this.actif() ? new Set(this.filtres().map(t => t.slug)) : null));
 
   // Liste regroupée par district, puis les districts autonomes
   groupes = computed(() => {
@@ -104,6 +115,7 @@ export class Regions {
     });
 
     this.charger();
+    this.chargerCarte();
 
     // Reflète l'état dans l'adresse sans recharger la page ni remonter en haut
     effect(() => {
@@ -127,6 +139,17 @@ export class Regions {
     });
   }
 
+  chargerCarte() {
+    this.carteEtat.set('chargement');
+    this.service.getCarte().subscribe({
+      next: c => {
+        this.carte.set(c);
+        this.carteEtat.set('ok');
+      },
+      error: () => this.carteEtat.set('erreur')
+    });
+  }
+
   saisir(evenement: Event) {
     this.recherche.set((evenement.target as HTMLInputElement).value);
   }
@@ -145,9 +168,16 @@ export class Regions {
     this.district.set('');
   }
 
+  // Clic sur une ligne de la liste
   choisir(territoire: Region, evenement: Event) {
     this.declencheur = evenement.currentTarget as HTMLElement;
     this.selection.set(territoire.slug);
+  }
+
+  // Clic sur un territoire de la carte
+  choisirSurCarte(slug: string) {
+    this.declencheur = null;
+    this.selection.set(slug);
   }
 
   fermer() {

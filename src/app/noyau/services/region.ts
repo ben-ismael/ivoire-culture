@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { Region } from '../modeles/region';
+import { Carte } from '../modeles/carte';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,10 @@ export class RegionService {
     return this.getRegions().pipe(
       map(regions => regions.find(r => r.slug === slug))
     );
+  }
+
+  // Les contours des 33 territoires
+  getCarte(): Observable<Carte> {
+    return this.http.get<Carte>('donnees/carte-territoires.json');
   }
 }
