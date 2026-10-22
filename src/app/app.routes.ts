@@ -8,7 +8,8 @@ export const routes: Routes = [
     component: MiseEnPagePublique,
     children: [
       { path: '', component: Accueil },
-      { path: 'regions', loadComponent: () => import('./pages/regions/regions').then(m => m.Regions) }
+      { path: 'regions', loadComponent: () => import('./pages/regions/regions').then(m => m.Regions) },
+      { path: 'regions/:slug', loadComponent: () => import('./pages/detail-region/detail-region').then(m => m.DetailRegion) }
     ]
   }
 ];

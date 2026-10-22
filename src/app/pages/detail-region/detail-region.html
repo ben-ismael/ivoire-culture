@@ -1,0 +1,302 @@
+<div class="page">
+
+  @switch (etat()) {
+
+    @case ('chargement') {
+      <div class="contenu attente" aria-busy="true" aria-label="Chargement de la page">
+        <div class="sq sq-fil"></div>
+        <div class="sq sq-hero"></div>
+        <div class="sq sq-ligne"></div>
+        <div class="sq sq-ligne court"></div>
+      </div>
+    }
+
+    @case ('erreur') {
+      <div class="contenu etat" role="alert">
+        <h1>Impossible de charger la page</h1>
+        <p>Vérifiez votre connexion, puis réessayez.</p>
+        <button type="button" class="bouton" (click)="charger(slug())">Réessayer</button>
+      </div>
+    }
+
+    @case ('introuvable') {
+      <div class="contenu etat">
+        <p class="sur">Erreur 404</p>
+        <h1>Ce territoire n'existe pas</h1>
+        <p>L'adresse demandée ne correspond à aucune région ni à aucun district.</p>
+        <a routerLink="/regions" class="bouton">Voir toutes les régions</a>
+      </div>
+    }
+
+    @default {
+      @if (region(); as r) {
+
+        <div class="contenu fil-zone">
+          <app-fil-ariane [niveaux]="fil()" />
+        </div>
+
+        <app-region-entete
+          [region]="r"
+          [accroche]="accroche()"
+          [photo]="heroPhoto()"
+          [villeId]="villeId()"
+          [libelleDeps]="libelleDeps()" />
+
+        <div class="corps">
+          <div class="contenu">
+
+            <!-- Présentation et distinction -->
+            @if (paragraphes().length || distinction()) {
+              <section class="bloc presentation" data-reveal
+                       [class.avec-aside]="paragraphes().length > 0 && !!distinction()">
+                @if (paragraphes().length) {
+                  <div class="texte-long">
+                    <h2>Présentation</h2>
+                    @for (p of paragraphes(); track $index) {
+                      <p>{{ p }}</p>
+                    }
+                  </div>
+                }
+                @if (distinction(); as dist) {
+                  <aside class="distinction">
+                    <i class="bi bi-award" aria-hidden="true"></i>
+                    <p class="sur">Distinction</p>
+                    <p class="distinction-texte">
+                      {{ dist.texte }}@if (dist.annee) { ({{ dist.annee }}) }
+                    </p>
+                    @if (dist.lien) {
+                      <a [href]="dist.lien" target="_blank" rel="noopener">Voir la source</a>
+                    }
+                  </aside>
+                }
+              </section>
+            }
+
+            <!-- Villes (ville phare) -->
+            @for (v of villes(); track v.id; let i = $index) {
+              <section class="bloc ville" [id]="v.id" data-reveal
+                       [class.inverse]="i % 2 === 1" [class.sans-photo]="!v.photo">
+                @if (v.photo; as p) {
+                  <figure class="photo">
+                    <img [src]="p.url" [alt]="p.alt" loading="lazy">
+                    @if (p.credit) { <figcaption>{{ p.credit }}</figcaption> }
+                  </figure>
+                }
+                <div class="ville-texte">
+                  <p class="sur">{{ v.nom === r.villePhare ? 'Ville phare' : 'Ville' }}</p>
+                  <h2>{{ v.nom }}</h2>
+                  @for (p of v.paragraphes; track $index) {
+                    <p>{{ p }}</p>
+                  }
+                </div>
+              </section>
+            }
+
+            <!-- Chef-lieu -->
+            @if (afficherChefLieu()) {
+              <section class="bloc chef-lieu" id="chef-lieu" data-reveal
+                       [class.avec-photo]="!!chefLieuPhoto()">
+                @if (chefLieuPhoto(); as p) {
+                  <figure class="photo">
+                    <img [src]="p.url" [alt]="p.alt" loading="lazy">
+                    @if (p.credit) { <figcaption>{{ p.credit }}</figcaption> }
+                  </figure>
+                }
+                <div>
+                  <p class="sur">Le chef-lieu</p>
+                  <h2>{{ r.chefLieu }}</h2>
+                  @if (chefLieuTexte()) {
+                    <p>{{ chefLieuTexte() }}</p>
+                  } @else {
+                    <p>Chef-lieu de la région {{ r.nom }}, dans le district {{ r.district }}.</p>
+                  }
+                </div>
+              </section>
+            }
+
+            <!-- Départements ou communes -->
+            @if (departements().length) {
+              <section class="bloc" id="departements" data-reveal>
+                <h2>{{ libelleDeps() === 'Communes' ? 'Les communes' : 'Les départements' }}</h2>
+                <ul class="grille grille-dep">
+                  @for (d of departements(); track d.nom) {
+                    <li>
+                      <article class="carte">
+                        @if (d.image; as im) {
+                          <img [src]="im.url" [alt]="im.alt" loading="lazy">
+                        }
+                        <div class="carte-corps">
+                          @if (d.etiquette) { <span class="etiquette">{{ d.etiquette }}</span> }
+                          <h3>{{ d.nom }}</h3>
+                          @if (d.phrase) { <p>{{ d.phrase }}</p> }
+                        </div>
+                      </article>
+                    </li>
+                  }
+                </ul>
+              </section>
+            }
+
+            <!-- À découvrir -->
+            @if (lieux().length) {
+              <section class="bloc" id="a-decouvrir" data-reveal>
+                <h2>À découvrir</h2>
+                <ul class="grille grille-lieux">
+                  @for (l of lieux(); track l.nom) {
+                    <li>
+                      <article class="carte">
+                        @if (l.image; as im) {
+                          <img [src]="im.url" [alt]="im.alt" loading="lazy">
+                        }
+                        <div class="carte-corps">
+                          <h3>{{ l.nom }}</h3>
+                          @if (l.description) { <p>{{ l.description }}</p> }
+                        </div>
+                      </article>
+                    </li>
+                  }
+                </ul>
+              </section>
+            }
+
+            <!-- À vivre (agenda) -->
+            @if (rendezVous().length) {
+              <section class="bloc" id="a-vivre" data-reveal>
+                <h2>À vivre</h2>
+                <ul class="evenements">
+                  @for (e of rendezVous(); track e.slug) {
+                    <li>
+                      <a class="ligne-evt" [routerLink]="['/evenements', e.slug]">
+                        <span class="date"><strong>{{ e.jour }}</strong> {{ e.mois }}</span>
+                        <span class="evt-texte">
+                          <span class="evt-meta">{{ e.type }} · {{ e.ville }}</span>
+                          <span class="evt-nom">{{ e.nom }}</span>
+                        </span>
+                        <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </section>
+            }
+
+            <!-- Culture de la région -->
+            @if (cultureLiee().length) {
+              <section class="bloc" id="culture" data-reveal>
+                <h2>La culture de la région</h2>
+                <ul class="grille grille-culture">
+                  @for (x of cultureLiee(); track x.c.id) {
+                    <li>
+                      <a class="carte" [routerLink]="['/culture', x.c.categorieSlug, x.c.slug]">
+                        @if (x.c.image) {
+                          <img [src]="x.c.image" [alt]="x.c.imageAlt" loading="lazy">
+                        } @else {
+                          <span class="vide-img"></span>
+                        }
+                        <span class="carte-corps">
+                          @if (x.categorie) { <span class="etiquette">{{ x.categorie }}</span> }
+                          <h3>{{ x.c.titre }}</h3>
+                          <p>{{ x.c.resume }}</p>
+                        </span>
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </section>
+            }
+
+            <!-- Galerie -->
+            @if (galerie().length) {
+              <section class="bloc" id="galerie" data-reveal>
+                <h2>Galerie</h2>
+                <ul class="grille grille-galerie">
+                  @for (p of galerie(); track p.url; let i = $index) {
+                    <li>
+                      <button type="button" class="vignette" (click)="ouvrirPhoto(i)"
+                              [attr.aria-label]="'Agrandir : ' + p.alt">
+                        <img [src]="p.url" [alt]="p.alt" loading="lazy">
+                      </button>
+                    </li>
+                  }
+                </ul>
+              </section>
+            }
+
+            <!-- Continuer l'exploration -->
+            @if (suite().length || voisinage().precedent || voisinage().suivant) {
+              <section class="bloc suite" data-reveal>
+                <div class="entete-bloc">
+                  <h2>Continuer l'exploration</h2>
+                  @if (r.type === 'region') {
+                    <a class="lien-fleche" routerLink="/regions" [queryParams]="{ district: r.district }">
+                      Toutes les régions du district {{ r.district }}
+                      <i class="bi bi-arrow-right"></i>
+                    </a>
+                  }
+                </div>
+
+                @if (suite().length) {
+                  <ul class="grille grille-suite">
+                    @for (t of suite(); track t.slug) {
+                      <li>
+                        <a class="carte-suite" [routerLink]="['/regions', t.slug]">
+                          <span class="sur">{{ t.type === 'region' ? t.district : 'District autonome' }}</span>
+                          <span class="nom">{{ t.nom }}</span>
+                          <span class="chef">Chef-lieu : {{ t.chefLieu }}</span>
+                        </a>
+                      </li>
+                    }
+                  </ul>
+                }
+
+                @if (voisinage().precedent || voisinage().suivant) {
+                  <nav class="navigation" aria-label="Territoires du district">
+                    @if (voisinage().precedent; as p) {
+                      <a class="nav-lien" [routerLink]="['/regions', p.slug]">
+                        <i class="bi bi-arrow-left"></i>
+                        <span><small>Précédent</small>{{ p.nom }}</span>
+                      </a>
+                    } @else {
+                      <span></span>
+                    }
+                    @if (voisinage().suivant; as s) {
+                      <a class="nav-lien droite" [routerLink]="['/regions', s.slug]">
+                        <span><small>Suivant</small>{{ s.nom }}</span>
+                        <i class="bi bi-arrow-right"></i>
+                      </a>
+                    }
+                  </nav>
+                }
+              </section>
+            }
+
+          </div>
+        </div>
+
+        <app-region-sources [sources]="sources()" [credits]="credits()" />
+      }
+    }
+  }
+
+  <!-- Visionneuse de la galerie -->
+  @if (photoCourante(); as p) {
+    <div class="visionneuse" role="dialog" aria-modal="true" aria-label="Galerie photo" (click)="fermerPhoto()">
+      <button type="button" class="vis-bouton vis-fermer" aria-label="Fermer"
+              (click)="fermerPhoto(); $event.stopPropagation()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button type="button" class="vis-bouton vis-prec" aria-label="Photo précédente"
+              (click)="naviguer(-1); $event.stopPropagation()">
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      <figure (click)="$event.stopPropagation()">
+        <img [src]="p.url" [alt]="p.alt">
+        <figcaption>{{ p.alt }}@if (p.credit) { · {{ p.credit }} }</figcaption>
+      </figure>
+      <button type="button" class="vis-bouton vis-suiv" aria-label="Photo suivante"
+              (click)="naviguer(1); $event.stopPropagation()">
+        <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+  }
+</div>

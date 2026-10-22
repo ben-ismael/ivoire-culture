@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 export interface Niveau {
   libelle: string;
   lien?: string;
+  params?: Record<string, string>;
 }
 
 @Component({

@@ -1,0 +1,44 @@
+@if (sources().length || credits().length) {
+  <section class="sources" id="sources">
+    <div class="contenu">
+      <h2>Sources et crédits</h2>
+
+      <div class="colonnes">
+        @if (sources().length) {
+          <div>
+            <h3>Sources</h3>
+            <ul>
+              @for (s of sources(); track s.titre) {
+                <li>
+                  @if (s.auteur) { <span>{{ s.auteur }} · </span> }
+                  <strong>{{ s.titre }}</strong>
+                  @if (s.annee) { <span> ({{ s.annee }})</span> }
+                  @if (s.url) {
+                    <a [href]="s.url" target="_blank" rel="noopener">Consulter</a>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        }
+
+        @if (credits().length) {
+          <div>
+            <h3>Crédits photo</h3>
+            <ul>
+              @for (c of credits(); track c.legende) {
+                <li>
+                  <strong>{{ c.legende }}</strong>
+                  <span> · {{ c.credit }}</span>
+                  @if (c.source) {
+                    <a [href]="c.source" target="_blank" rel="noopener">Source</a>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

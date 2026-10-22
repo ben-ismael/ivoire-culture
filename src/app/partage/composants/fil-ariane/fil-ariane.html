@@ -3,7 +3,7 @@
     @for (n of niveaux(); track n.libelle; let dernier = $last) {
       <li>
         @if (n.lien && !dernier) {
-          <a [routerLink]="n.lien">{{ n.libelle }}</a>
+          <a [routerLink]="n.lien" [queryParams]="n.params">{{ n.libelle }}</a>
         } @else {
           <span [attr.aria-current]="dernier ? 'page' : null">{{ n.libelle }}</span>
         }

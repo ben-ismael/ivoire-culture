@@ -1,0 +1,67 @@
+:host {
+  display: block;
+}
+
+.sources {
+  padding: var(--espace-7) 0;
+  background: var(--blanc);
+  border-top: 1px solid var(--bordure);
+}
+
+.contenu {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 0 var(--espace-5);
+}
+
+h2 {
+  margin: 0 0 var(--espace-5);
+  font-size: 32px;
+}
+
+.colonnes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--espace-6) var(--espace-7);
+}
+
+h3 {
+  margin: 0 0 var(--espace-3);
+  font-family: var(--police-texte);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dore);
+}
+
+ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--texte-secondaire);
+}
+
+li strong {
+  font-weight: 600;
+  color: var(--texte);
+}
+
+li a {
+  margin-left: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .contenu {
+    padding: 0 var(--espace-4);
+  }
+}

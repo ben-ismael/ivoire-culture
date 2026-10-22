@@ -1,0 +1,67 @@
+<section class="entete">
+  @if (photo(); as p) {
+    <img class="fond" [src]="p.url" [alt]="p.alt" fetchpriority="high">
+  } @else if (silhouette(); as s) {
+    <svg class="silhouette" [attr.viewBox]="s.viewBox" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path [attr.d]="s.d" />
+    </svg>
+  }
+  <span class="voile"></span>
+
+  <div class="contenu">
+    <a routerLink="/regions" class="retour"><i class="bi bi-arrow-left"></i> Toutes les régions</a>
+    <p class="sur-titre">{{ surTitre() }}</p>
+    <h1>{{ region().nom }}</h1>
+    @if (accroche()) {
+      <p class="accroche">{{ accroche() }}</p>
+    }
+  </div>
+
+  @if (photo(); as p) {
+    @if (p.credit) {
+      <span class="credit">Photo : {{ p.credit }}</span>
+    }
+  }
+</section>
+
+<div class="bref-zone">
+  <div class="contenu">
+    <div class="barre">
+      <ul class="bref">
+        @if (!memeNom()) {
+          <li>
+            <span class="etiquette-bref">Chef-lieu</span>
+            <a class="valeur" [routerLink]="[]" fragment="chef-lieu">{{ region().chefLieu }}</a>
+          </li>
+        }
+        <li>
+          @if (region().type === 'region') {
+            <span class="etiquette-bref">District</span>
+            <a class="valeur" routerLink="/regions" [queryParams]="{ district: region().district }">{{ region().district }}</a>
+          } @else {
+            <span class="etiquette-bref">Statut</span>
+            <span class="valeur">District autonome</span>
+          }
+        </li>
+        <li>
+          <span class="etiquette-bref">{{ libelleDeps() }}</span>
+          <span class="valeur">{{ region().departements.length }}</span>
+        </li>
+        @if (region().villePhare) {
+          <li>
+            <span class="etiquette-bref">Ville phare</span>
+            @if (villeId(); as vid) {
+              <a class="valeur" [routerLink]="[]" [fragment]="vid">{{ region().villePhare }}</a>
+            } @else {
+              <span class="valeur">{{ region().villePhare }}</span>
+            }
+          </li>
+        }
+      </ul>
+
+      <a class="bouton-carte" routerLink="/regions" [queryParams]="{ territoire: region().slug }">
+        <i class="bi bi-map"></i> Voir sur la carte
+      </a>
+    </div>
+  </div>
+</div>

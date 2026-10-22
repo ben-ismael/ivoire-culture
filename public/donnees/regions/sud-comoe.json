@@ -1,0 +1,75 @@
+{
+  "slug": "sud-comoe",
+  "relu": false,
+  "accroche": "Lagunes, plages et royaumes traditionnels : le Sud-Comoé, entre mémoire coloniale et culture N'zima.",
+  "image": null,
+  "presentation": [
+    "Située au sud-est de la Côte d'Ivoire, la région du Sud-Comoé fait partie du district de la Comoé, aux côtés de l'Indénié-Djuablin. Son chef-lieu est Aboisso, et elle compte quatre départements : Aboisso, Adiaké, Grand-Bassam et Tiapoum.",
+    "Son littoral réunit plages, cordon côtier et lagune. À Assinie, des hôtels s'étirent entre la mer et la lagune.",
+    "La vie traditionnelle s'y organise autour de royaumes : chaque département compte au moins un roi. En pays agni, autour d'Aboisso, se trouve le royaume du Sanwi. Les N'zima, notamment à Grand-Bassam, célèbrent chaque année l'Abissa, leur fête de nouvel an."
+  ],
+  "distinction": {
+    "texte": "Ville historique de Grand-Bassam, inscrite au patrimoine mondial de l'UNESCO",
+    "annee": 2012,
+    "lien": "https://whc.unesco.org/fr/list/1322"
+  },
+  "villes": [
+    {
+      "id": "grand-bassam",
+      "nom": "Grand-Bassam",
+      "vedette": true,
+      "paragraphes": [
+        "Première capitale de la Côte d'Ivoire, Grand-Bassam a été conçue à la fin du XIXe siècle et au début du XXe siècle comme une ville coloniale, avec des quartiers dédiés au commerce, à l'administration et à l'habitat des Européens et des Africains. Premier port, centre économique et judiciaire du territoire, elle a attiré des populations venues d'Afrique, d'Europe et du Levant.",
+        "Son centre historique est inscrit sur la Liste du patrimoine mondial de l'UNESCO depuis 2012. Le site classé associe la ville coloniale et un village N'zima, qui témoigne de la permanence des cultures locales."
+      ],
+      "images": []
+    }
+  ],
+  "chefLieu": {
+    "texte": "Aboisso est le chef-lieu du Sud-Comoé. La ville se situe en pays agni, dans l'aire du royaume du Sanwi.",
+    "image": null
+  },
+  "departements": [],
+  "lieux": [],
+  "galerie": [],
+  "sources": [
+    {
+      "type": "institution",
+      "titre": "Ville historique de Grand-Bassam",
+      "auteur": "UNESCO, Centre du patrimoine mondial",
+      "annee": 2012,
+      "url": "https://whc.unesco.org/fr/list/1322"
+    },
+    {
+      "type": "article",
+      "titre": "Anniversaire de l'inscription de Grand-Bassam au patrimoine mondial",
+      "auteur": "Agence ivoirienne de presse (AIP)",
+      "annee": 2024,
+      "url": "https://www.aip.ci/?p=79331"
+    },
+    {
+      "type": "site",
+      "titre": "Région du Sud-Comoé",
+      "auteur": "Portail Économie ivoirienne",
+      "url": "https://economie-ivoirienne.ci/pole-competitif/region-du-sud-comoe.html"
+    },
+    {
+      "type": "institution",
+      "titre": "Décret n° 2011-263 du 28 septembre 2011 portant organisation du territoire en districts et régions",
+      "auteur": "République de Côte d'Ivoire",
+      "annee": 2011
+    },
+    {
+      "type": "article",
+      "titre": "La région du Sud-Comoé, un réceptacle de rois",
+      "auteur": "Abidjan.net",
+      "url": "https://news.abidjan.net/articles/643268/la-region-du-sud-comoe-un-receptacle-de-rois"
+    },
+    {
+      "type": "article",
+      "titre": "Côte d'Ivoire : quand le pardon et la solidarité prennent des couleurs sacrées, c'est l'Abissa du peuple N'zima",
+      "auteur": "Le360 Afrique",
+      "url": "https://afrique.le360.ma/culture/cote-divoire-quand-le-pardon-et-la-solidarite-prennent-des-couleurs-sacrees-cest-labissa-du-peuple_HL5DKNZ33NEQNK2XQDX3KQ323Q/"
+    }
+  ]
+}

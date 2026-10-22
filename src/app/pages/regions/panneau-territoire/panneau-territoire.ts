@@ -18,9 +18,6 @@ export class PanneauTerritoire {
   // Abidjan est découpé en communes, les autres territoires en départements
   libelleDeps = computed(() => (this.territoire().slug === 'abidjan' ? 'Communes' : 'Départements'));
 
-  // Le bouton vers la fiche n'existe que si la fiche est publiée
-  ficheDisponible = computed(() => this.territoire().statut === 'publie');
-
   constructor() {
     // Le focus passe au panneau à l'ouverture (accessibilité clavier)
     afterNextRender(() => this.racine().nativeElement.focus());
