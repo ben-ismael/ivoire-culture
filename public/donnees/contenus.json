@@ -34,8 +34,8 @@
   {
     "id": 2,
     "titre": "Plat de démonstration B",
-    "slug": "plat-demo-b",
-    "resume": "Un résumé fictif de longueur moyenne pour tester l'affichage sur la carte.",
+    "slug": "",
+    "resume": "",
     "description": "Description fictive courte.",
     "categorieSlug": "gastronomie",
     "regionSlug": "tonkpi",
