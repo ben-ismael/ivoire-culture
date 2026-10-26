@@ -1,6 +1,6 @@
 {
   "slug": "sud-comoe",
-  "relu": false,
+  "relu": true,
   "accroche": "Lagunes, plages et royaumes traditionnels : le Sud-Comoé, entre mémoire coloniale et culture N'zima.",
   "image": null,
   "presentation": [
@@ -22,14 +22,52 @@
         "Première capitale de la Côte d'Ivoire, Grand-Bassam a été conçue à la fin du XIXe siècle et au début du XXe siècle comme une ville coloniale, avec des quartiers dédiés au commerce, à l'administration et à l'habitat des Européens et des Africains. Premier port, centre économique et judiciaire du territoire, elle a attiré des populations venues d'Afrique, d'Europe et du Levant.",
         "Son centre historique est inscrit sur la Liste du patrimoine mondial de l'UNESCO depuis 2012. Le site classé associe la ville coloniale et un village N'zima, qui témoigne de la permanence des cultures locales."
       ],
-      "images": []
+      "images": [
+        {
+          "url": "images/regions/sud-comoe/grand-bassam-01.jpg",
+          "alt": "Vue de Grand-Bassam"
+        }
+      ]
     }
   ],
   "chefLieu": {
     "texte": "Aboisso est le chef-lieu du Sud-Comoé. La ville se situe en pays agni, dans l'aire du royaume du Sanwi.",
-    "image": null
+    "image": {
+      "url": "images/regions/sud-comoe/aboisso-01.jpg",
+      "alt": "Vue d'Aboisso"
+    }
   },
-  "departements": [],
+  "departements": [
+    {
+      "nom": "Adiaké",
+      "image": {
+        "url": "images/regions/sud-comoe/dep-adiake.jpg",
+        "alt": "Vue d'Adiaké"
+      }
+    },
+    {
+      "nom": "Tiapoum",
+      "image": {
+        "url": "images/regions/sud-comoe/dep-tiapoum.jpg",
+        "alt": "Vue de Tiapoum"
+      }
+    },
+    {
+      "nom": "Aboisso",
+      "image": {
+        "url": "images/regions/sud-comoe/aboisso-01.jpg",
+        "alt": "Vue d'Aboisso"
+      }
+    },
+    {
+      "nom": "Grand-Bassam",
+      "image": {
+        "url": "images/regions/sud-comoe/grand-bassam-01.jpg",
+        "alt": "Vue de Grand-Bassam"
+      }
+    }
+    
+  ],
   "lieux": [],
   "galerie": [],
   "sources": [
