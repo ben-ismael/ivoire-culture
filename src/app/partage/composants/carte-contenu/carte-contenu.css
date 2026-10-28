@@ -1,0 +1,275 @@
+
+:host {
+  display: block;
+  min-width: 0;
+  --courbe: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carte {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  color: var(--texte);
+  background: var(--blanc);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  transition: transform 0.4s var(--courbe),
+    box-shadow 0.4s var(--courbe);
+}
+
+.carte:hover,
+.carte:focus-visible {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(9, 63, 48, 0.1);
+  text-decoration: none;
+}
+
+.carte:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+
+/* Visuel commun */
+
+.visuel {
+  position: relative;
+  overflow: hidden;
+  background: var(--vert-clair);
+}
+
+.visuel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--courbe);
+}
+
+.carte:hover .visuel img,
+.carte:focus-visible .visuel img {
+  transform: scale(1.05);
+}
+
+/* Remplacement visuel si l'image est absente */
+
+.visuel.sans-photo {
+  background: linear-gradient(
+    135deg,
+    var(--vert-clair),
+    var(--dore-clair)
+  );
+}
+
+.fond-gastronomie.sans-photo {
+  background: linear-gradient(135deg, #f2d8ad, #b86b37);
+}
+
+.fond-danses.sans-photo {
+  background: linear-gradient(135deg, #d9c7e8, #6b467e);
+}
+
+.fond-musiques.sans-photo {
+  background: linear-gradient(135deg, #e8d39a, #9e6b26);
+}
+
+.fond-artisanat.sans-photo {
+  background: linear-gradient(135deg, #d7bda1, #75513c);
+}
+
+.fond-contes.sans-photo {
+  background: linear-gradient(135deg, #c5d9bf, #426d4d);
+}
+
+.fond-personnalites.sans-photo {
+  background: linear-gradient(135deg, #c4d5e5, #426581);
+}
+
+.fond-fetes.sans-photo {
+  background: linear-gradient(135deg, #f3c6a7, #bd653f);
+}
+
+/* Badge */
+
+.badge-categorie {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  max-width: calc(100% - 32px);
+  padding: 8px 12px;
+  overflow: hidden;
+  color: var(--blanc);
+  background: rgba(5, 59, 41, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Texte commun */
+
+.texte {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.meta {
+  margin: 0 0 16px;
+  color: var(--orange-fonce, var(--orange));
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.texte h3 {
+  margin: 0 0 16px;
+  color: var(--vert-fonce);
+  font-family: var(--police-titre);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.resume {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--texte-secondaire);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.lien {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--vert-fonce);
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.lien i {
+  transition: transform 0.3s var(--courbe);
+}
+
+.carte:hover .lien,
+.carte:focus-visible .lien {
+  color: var(--orange);
+}
+
+.carte:hover .lien i,
+.carte:focus-visible .lien i {
+  transform: translateX(5px);
+}
+
+/* Variante Accueil : image à gauche */
+
+.carte-accueil {
+  min-height: 400px;
+}
+
+.carte-accueil .visuel {
+  flex: 0 0 45%;
+}
+
+.carte-accueil .texte h3 {
+  font-size: 30px;
+}
+
+/* Variante Catalogue : image au-dessus */
+
+.carte-catalogue {
+  flex-direction: column;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.carte-catalogue .visuel {
+  flex: none;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.carte-catalogue .texte {
+  flex: 1;
+  padding: 22px;
+}
+
+.carte-catalogue .texte h3 {
+  font-size: 24px;
+}
+
+.carte-catalogue .lien {
+  padding-top: 20px;
+}
+
+/* Tablette et mobile */
+
+@media (max-width: 767px) {
+  .carte-accueil .texte {
+    padding: 20px;
+  }
+
+  .carte-accueil .texte h3 {
+    font-size: 26px;
+  }
+
+  .carte-catalogue .texte {
+    padding: 18px;
+  }
+
+  .carte-catalogue .texte h3 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 559px) {
+  .carte-accueil {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .carte-accueil .visuel {
+    flex: none;
+    width: 100%;
+    height: 240px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carte,
+  .visuel img,
+  .lien,
+  .lien i {
+    transition: none;
+  }
+
+  .carte:hover,
+  .carte:focus-visible {
+    transform: none;
+  }
+
+  .carte:hover .visuel img,
+  .carte:focus-visible .visuel img {
+    transform: none;
+  }
+}

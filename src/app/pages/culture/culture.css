@@ -1,0 +1,1059 @@
+
+/* =========================================
+   PAGE CULTURE — VARIABLES ET BASE
+========================================= */
+
+.page-culture {
+  --culture-vert: #053b29;
+  --culture-vert-clair: #0b563c;
+  --culture-or: #d4a359;
+  --culture-orange: #e86a33;
+  --culture-fond: #fdfbf7;
+  --culture-texte: #24342d;
+  --culture-texte-secondaire: #68746d;
+  --culture-bordure: #e8e4dc;
+
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--culture-fond);
+  color: var(--culture-texte);
+}
+
+/* =========================================
+   EN-TÊTE ÉDITORIAL — CULTURE
+========================================= */
+
+.hero-culture {
+  --hero-vert: #053b29;
+  --hero-or: #d4a359;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 410px;
+  padding: 75px max(7%, calc((100% - 1200px) / 2));
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+
+  background:
+    radial-gradient(
+      ellipse at 85% 20%,
+      rgba(212, 163, 89, 0.18),
+      transparent 35%
+    ),
+    linear-gradient(
+      115deg,
+      #03291e 0%,
+      #053b29 48%,
+      #0b5038 100%
+    );
+}
+
+/* Motif décoratif à droite */
+
+.hero-decoration {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: 48%;
+  height: 100%;
+  opacity: 0.2;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(253, 251, 247, 0.75) 1px,
+      transparent 1.5px
+    );
+
+  background-size: 22px 22px;
+
+  mask-image: linear-gradient(
+    to left,
+    #000 0%,
+    rgba(0, 0, 0, 0.65) 45%,
+    transparent 100%
+  );
+}
+
+/* Cercles décoratifs */
+
+.hero-culture::before,
+.hero-culture::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  border: 1px solid rgba(212, 163, 89, 0.22);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-culture::before {
+  top: -190px;
+  right: -75px;
+  width: 490px;
+  height: 490px;
+}
+
+.hero-culture::after {
+  right: 90px;
+  bottom: -245px;
+  width: 360px;
+  height: 360px;
+}
+
+/* Contenu textuel */
+
+.hero-contenu {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 760px;
+}
+
+/* Surtitre */
+
+.hero-surtitre {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 22px;
+
+  color: var(--hero-or);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.hero-surtitre::before {
+  width: 34px;
+  height: 2px;
+  flex-shrink: 0;
+  content: "";
+  background: var(--hero-or);
+}
+
+/* Titre principal */
+
+.hero-contenu h1 {
+  max-width: 760px;
+  margin: 0;
+
+  color: #fdfbf7;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.8rem, 5.4vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+/* Partie dorée du titre */
+
+.hero-contenu h1 span {
+  display: block;
+  margin-top: 5px;
+  color: var(--hero-or);
+}
+
+/* Description */
+
+.hero-description {
+  max-width: 620px;
+  margin: 24px 0 0;
+
+  color: rgba(253, 251, 247, 0.82);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+/* Indicateurs décoratifs */
+
+.hero-bas {
+  position: absolute;
+  right: 7%;
+  bottom: 32px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hero-bas span {
+  display: block;
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: rgba(253, 251, 247, 0.4);
+}
+
+.hero-bas span:first-child {
+  width: 28px;
+  border-radius: 8px;
+  background: var(--hero-or);
+}
+
+/* =========================================
+   FIL D'ARIANE
+========================================= */
+
+.fil-ariane {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 28px;
+
+  color: var(--culture-texte-secondaire);
+  font-size: 0.9rem;
+}
+
+.fil-ariane a {
+  color: var(--culture-vert);
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.fil-ariane a:hover {
+  color: var(--culture-orange);
+}
+
+.fil-ariane i {
+  color: #a5aaa4;
+  font-size: 0.75rem;
+}
+
+.fil-ariane span {
+  color: var(--culture-texte-secondaire);
+}
+
+/* =========================================
+   CATALOGUE
+========================================= */
+
+.catalogue {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 42px 28px 100px;
+}
+
+/* En-tête du catalogue */
+
+.catalogue-entete {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 32px;
+}
+
+.catalogue-entete h2 {
+  margin: 0;
+
+  color: var(--culture-vert);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.surtitre-section {
+  margin: 0 0 16px;
+
+  color: var(--culture-orange);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.catalogue-intro {
+  margin: 14px 0 0;
+
+  color: var(--culture-texte-secondaire);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* Nombre de résultats */
+
+.nombre-resultats {
+  flex-shrink: 0;
+  margin: 0 0 5px;
+  padding: 10px 15px;
+
+  border: 1px solid var(--culture-bordure);
+  border-radius: 30px;
+  background: #fff;
+
+  color: var(--culture-texte-secondaire);
+  font-size: 0.85rem;
+}
+
+.nombre-resultats strong {
+  margin-right: 4px;
+  color: var(--culture-vert);
+  font-size: 1rem;
+}
+
+/* =========================================
+   BARRE DE RECHERCHE
+========================================= */
+
+.recherche {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  width: 100%;
+  min-height: 60px;
+  margin-bottom: 30px;
+  padding: 0 20px;
+
+  border: 1px solid var(--culture-bordure);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(5, 59, 41, 0.025);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.recherche:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--culture-vert);
+  box-shadow: 0 0 0 4px rgba(5, 59, 41, 0.08);
+}
+
+.recherche > i {
+  flex-shrink: 0;
+  color: var(--culture-vert);
+  font-size: 1.15rem;
+}
+
+.recherche input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 17px 0;
+
+  border: 0;
+  outline: none;
+  background: transparent;
+
+  color: var(--culture-texte);
+  font: inherit;
+  font-size: 0.96rem;
+}
+
+.recherche input::placeholder {
+  color: #9a9f9a;
+}
+
+.recherche input::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Bouton d'effacement de la recherche */
+
+.effacer-recherche {
+  display: grid;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+
+  border: 0;
+  border-radius: 50%;
+  background: #f1f3ef;
+  color: var(--culture-texte-secondaire);
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.effacer-recherche:hover {
+  transform: rotate(90deg);
+  background: var(--culture-vert);
+  color: #fff;
+}
+
+/* =========================================
+   FILTRES
+========================================= */
+
+.zone-filtres {
+  margin-bottom: 35px;
+  padding: 25px;
+
+  border: 1px solid var(--culture-bordure);
+  border-radius: 16px;
+  background: #fff;
+}
+
+/* Libellé des catégories */
+
+.libelle-filtre {
+  margin: 0 0 14px;
+  color: var(--culture-texte);
+  font-size: 0.87rem;
+  font-weight: 750;
+}
+
+/* Liste des catégories */
+
+.liste-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Boutons de catégorie */
+
+.bouton-categorie {
+  padding: 10px 17px;
+
+  border: 1px solid #e5e8e2;
+  border-radius: 30px;
+  background: #fff;
+
+  color: #59665e;
+  font-size: 0.86rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.bouton-categorie:hover {
+  transform: translateY(-2px);
+  border-color: var(--culture-vert);
+  color: var(--culture-vert);
+  box-shadow: 0 4px 12px rgba(5, 59, 41, 0.08);
+}
+
+.bouton-categorie:active {
+  transform: scale(0.96);
+}
+
+.bouton-categorie.active {
+  border-color: var(--culture-vert);
+  background: var(--culture-vert);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(5, 59, 41, 0.14);
+}
+
+/* Région, tri et réinitialisation */
+
+.filtres-secondaires {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+
+  margin-top: 25px;
+  padding-top: 24px;
+  border-top: 1px solid #efeee9;
+}
+
+.champ-filtre {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 190px;
+}
+
+.champ-filtre span {
+  color: var(--culture-texte);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.champ-filtre select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 38px 0 14px;
+
+  border: 1px solid #e4e6df;
+  border-radius: 9px;
+  outline: none;
+  background-color: #fff;
+
+  color: var(--culture-texte);
+  font: inherit;
+  font-size: 0.88rem;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.champ-filtre select:hover {
+  border-color: #aebbb0;
+}
+
+.champ-filtre select:focus {
+  border-color: var(--culture-vert);
+  box-shadow: 0 0 0 3px rgba(5, 59, 41, 0.08);
+}
+
+/* Bouton Réinitialiser des filtres */
+
+.reinitialiser {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 46px;
+  padding: 0 15px;
+
+  border: 1px solid #eadbd3;
+  border-radius: 9px;
+  background: #fffaf7;
+
+  color: #a54a26;
+  font-size: 0.86rem;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.reinitialiser:hover {
+  transform: translateY(-2px);
+  border-color: var(--culture-orange);
+  background: #fff0e8;
+}
+
+.reinitialiser:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
+   GRILLE DES HISTOIRES
+========================================= */
+
+.grille-culture {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* Composant carte Angular */
+
+.grille-culture app-carte-contenu {
+  display: block;
+  min-width: 0;
+  height: 100%;
+  border-radius: 14px;
+
+  transition:
+    transform 0.28s ease,
+    filter 0.28s ease;
+}
+
+/* Effet de survol des cartes après leur apparition */
+
+.grille-culture app-carte-contenu.reveil-visible:hover {
+  transform: translateY(-6px);
+  filter: drop-shadow(0 12px 16px rgba(5, 59, 41, 0.09));
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 55px;
+}
+
+.numeros-pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bouton-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-width: 44px;
+  height: 44px;
+  padding: 0 12px;
+
+  border: 1px solid var(--culture-bordure);
+  border-radius: 10px;
+  background: #fff;
+
+  color: var(--culture-vert);
+  font-size: 0.9rem;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.bouton-page:not(:disabled):hover {
+  transform: translateY(-2px);
+  border-color: var(--culture-vert);
+  box-shadow: 0 4px 10px rgba(5, 59, 41, 0.08);
+}
+
+.bouton-page:not(:disabled):active {
+  transform: scale(0.95);
+}
+
+.bouton-page.active {
+  border-color: var(--culture-vert);
+  background: var(--culture-vert);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(5, 59, 41, 0.16);
+}
+
+.bouton-page:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bouton-navigation {
+  padding: 0 15px;
+}
+
+.indicateur-mobile {
+  display: none;
+  color: var(--culture-texte-secondaire);
+  font-size: 0.85rem;
+}
+
+/* =========================================
+   AUCUN RÉSULTAT
+========================================= */
+
+.aucun-resultat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 560px;
+  margin: 20px auto 0;
+  padding: 65px 25px;
+
+  border: 1px dashed #d8ddd5;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.65);
+
+  text-align: center;
+}
+
+/* Icône */
+
+.icone-vide {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 24px;
+  place-items: center;
+
+  border-radius: 50%;
+  background: #edf3ed;
+  color: var(--culture-vert);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.aucun-resultat:hover .icone-vide {
+  transform: translateY(-4px) rotate(-5deg);
+  background: #e1eee2;
+}
+
+.icone-vide i {
+  font-size: 2rem;
+}
+
+/* Texte */
+
+.aucun-resultat h3 {
+  margin: 0;
+
+  color: var(--culture-vert);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.65rem;
+}
+
+.aucun-resultat p {
+  margin: 14px 0 25px;
+
+  color: var(--culture-texte-secondaire);
+  font-size: 0.94rem;
+  line-height: 1.8;
+}
+
+/* Bouton de retour aux histoires */
+
+.bouton-reinitialiser {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 0 22px;
+
+  border: 1px solid var(--culture-vert);
+  border-radius: 9px;
+  background: var(--culture-vert);
+
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.bouton-reinitialiser:hover {
+  transform: translateY(-3px);
+  background: var(--culture-vert-clair);
+  box-shadow: 0 8px 18px rgba(5, 59, 41, 0.18);
+}
+
+.bouton-reinitialiser:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
+   ANIMATIONS AU DÉFILEMENT
+   Pilotées par IntersectionObserver dans culture.ts
+========================================= */
+
+.page-culture.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  transition-delay: var(--delai-revelation, 0ms);
+}
+
+.page-culture.reveal-ready [data-reveal="fade-down"] {
+  transform: translateY(-18px);
+}
+
+.page-culture.reveal-ready [data-reveal="fade-left"] {
+  transform: translateX(24px);
+}
+
+.page-culture.reveal-ready [data-reveal="fade-right"] {
+  transform: translateX(-24px);
+}
+
+.page-culture.reveal-ready [data-reveal].reveil-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* =========================================
+   ACCESSIBILITÉ — NAVIGATION AU CLAVIER
+========================================= */
+
+.page-culture button:focus-visible,
+.page-culture a:focus-visible,
+.page-culture select:focus-visible {
+  outline: 3px solid rgba(212, 163, 89, 0.8);
+  outline-offset: 3px;
+}
+
+/* Respect des préférences de mouvement */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-culture.reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .page-culture *,
+  .page-culture *::before,
+  .page-culture *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================
+   TABLETTES
+========================================= */
+
+@media (max-width: 992px) {
+  .hero-culture {
+    min-height: 370px;
+    padding: 70px 6%;
+  }
+
+  .hero-contenu h1 {
+    font-size: clamp(2.7rem, 6vw, 4rem);
+  }
+
+  .catalogue {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .grille-culture {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .filtres-secondaires {
+    gap: 14px;
+  }
+
+  .champ-filtre {
+    min-width: 160px;
+  }
+}
+
+/* =========================================
+   MOBILES
+========================================= */
+
+@media (max-width: 600px) {
+  /* En-tête */
+
+  .hero-culture {
+    min-height: 350px;
+    padding: 58px 24px 68px;
+  }
+
+  .hero-decoration {
+    width: 75%;
+    opacity: 0.13;
+  }
+
+  .hero-culture::before {
+    top: -100px;
+    right: -180px;
+    width: 340px;
+    height: 340px;
+  }
+
+  .hero-culture::after {
+    right: -100px;
+    bottom: -220px;
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-surtitre {
+    margin-bottom: 18px;
+    font-size: 0.7rem;
+  }
+
+  .hero-contenu h1 {
+    font-size: clamp(2.45rem, 10vw, 3.3rem);
+    line-height: 1.15;
+  }
+
+  .hero-description {
+    margin-top: 20px;
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+
+  .hero-bas {
+    right: 24px;
+    bottom: 23px;
+  }
+
+  /* Fil d'Ariane */
+
+  .fil-ariane {
+    gap: 9px;
+    padding: 20px 22px;
+    font-size: 0.83rem;
+  }
+
+  /* Catalogue */
+
+  .catalogue {
+    padding: 28px 20px 65px;
+  }
+
+  .catalogue-entete {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 25px;
+  }
+
+  .catalogue-entete h2 {
+    font-size: 2.1rem;
+  }
+
+  .catalogue-intro {
+    font-size: 0.92rem;
+  }
+
+  .nombre-resultats {
+    margin: 0;
+  }
+
+  /* Recherche */
+
+  .recherche {
+    min-height: 54px;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding: 0 14px;
+  }
+
+  .recherche input {
+    padding: 14px 0;
+    font-size: 0.9rem;
+  }
+
+  /* Filtres */
+
+  .zone-filtres {
+    margin-bottom: 25px;
+    padding: 19px 16px;
+    border-radius: 13px;
+  }
+
+  .liste-categories {
+    gap: 8px;
+  }
+
+  .bouton-categorie {
+    padding: 9px 13px;
+    font-size: 0.81rem;
+  }
+
+  .filtres-secondaires {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+
+  .champ-filtre {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .reinitialiser {
+    width: 100%;
+  }
+
+  /* Cartes */
+
+  .grille-culture {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  /* Pagination */
+
+  .pagination {
+    gap: 8px;
+    margin-top: 35px;
+  }
+
+  .bouton-page {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 8px;
+  }
+
+  .bouton-navigation {
+    min-width: 40px;
+    padding: 0 11px;
+  }
+
+  .texte-navigation {
+    display: none;
+  }
+
+  .numeros-pages {
+    gap: 5px;
+  }
+
+  .indicateur-mobile {
+    display: block;
+    width: 100%;
+    order: 3;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  /* Aucun résultat */
+
+  .aucun-resultat {
+    padding: 45px 20px;
+  }
+
+  .aucun-resultat h3 {
+    font-size: 1.45rem;
+  }
+}

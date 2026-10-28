@@ -1,3 +1,4 @@
+
 <section class="histoires" [class.visible]="visible()">
   <div class="contenu">
 
@@ -21,30 +22,14 @@
 
     <div class="grille">
       @for (h of histoires(); track h.contenu.id; let i = $index) {
-        <a class="carte" [style.--i]="i"
-           [routerLink]="['/culture', h.contenu.categorieSlug, h.contenu.slug]">
-
-          <div class="visuel">
-            @if (h.contenu.image) {
-              <img [src]="h.contenu.image" [alt]="h.contenu.imageAlt" loading="lazy">
-            } @else {
-              <span class="sans-image"></span>
-            }
-            <span class="badge-categorie">{{ h.categorie }}</span>
-          </div>
-
-          <div class="texte">
-            <p class="meta">
-              {{ h.region }}
-              @if (h.contenu.tempsLecture) {
-                · {{ h.contenu.tempsLecture }} min de lecture
-              }
-            </p>
-            <h3>{{ h.contenu.titre }}</h3>
-            <p class="resume">{{ h.contenu.resume }}</p>
-            <span class="lien">Lire l'histoire <i class="bi bi-arrow-right"></i></span>
-          </div>
-        </a>
+        <div class="carte-animee" [style.--i]="i">
+          <app-carte-contenu
+            [contenu]="h.contenu"
+            [region]="h.region"
+            [categorie]="h.categorie"
+            mode="accueil"
+          />
+        </div>
       }
     </div>
 
@@ -52,8 +37,10 @@
       <p class="compteur">
         Plus de <strong>120 récits</strong> à lire, écouter et transmettre.
       </p>
+
       <a routerLink="/culture" class="bouton-principal">
-        Découvrir toutes les histoires <i class="bi bi-arrow-right"></i>
+        Découvrir toutes les histoires
+        <i class="bi bi-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
 

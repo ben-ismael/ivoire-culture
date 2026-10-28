@@ -1,3 +1,4 @@
+
 [
   {
     "id": 1,
@@ -33,5 +34,26 @@
     "slug": "contes-et-legendes",
     "description": "Récits traditionnels transmis de génération en génération.",
     "icone": "book-open"
+  },
+  {
+    "id": 6,
+    "nom": "Personnalités",
+    "slug": "personnalites",
+    "description": "Portraits et parcours de personnalités qui ont marqué la culture ivoirienne.",
+    "icone": "users"
+  },
+  {
+    "id": 7,
+    "nom": "Fêtes et cérémonies",
+    "slug": "fetes-et-ceremonies",
+    "description": "Fêtes, célébrations et cérémonies culturelles de Côte d’Ivoire.",
+    "icone": "calendar"
+  },
+  {
+    "id": 8,
+    "nom": "Patrimoine",
+    "slug": "patrimoine",
+    "description": "Sites historiques, monuments, architecture et patrimoine naturel de Côte d’Ivoire.",
+    "icone": "landmark"
   }
 ]

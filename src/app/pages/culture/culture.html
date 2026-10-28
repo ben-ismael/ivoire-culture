@@ -1,0 +1,272 @@
+
+<main class="page-culture">
+
+  <!-- Bannière éditoriale -->
+  <section class="hero-culture" data-reveal="fade-down">
+    <div class="hero-decoration" aria-hidden="true"></div>
+
+    <div class="hero-contenu">
+      <p class="hero-surtitre">Histoires populaires</p>
+
+      <h1>
+        Nos histoires,
+        <span>notre identité</span>
+      </h1>
+
+      <p class="hero-description">
+        Découvrez les récits, les traditions et les savoir-faire
+        qui font la richesse de la culture ivoirienne et transmettent
+        notre mémoire de génération en génération.
+      </p>
+    </div>
+
+    <div class="hero-bas" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+
+  <!-- Fil d'Ariane -->
+  <nav
+    class="fil-ariane"
+    aria-label="Fil d’Ariane"
+    data-reveal="fade-right"
+  >
+    <a routerLink="/">Accueil</a>
+    <i class="bi bi-chevron-right" aria-hidden="true"></i>
+    <span aria-current="page">Culture</span>
+  </nav>
+
+  <!-- Catalogue -->
+  <section class="catalogue" aria-labelledby="titre-catalogue">
+
+    <!-- En-tête du catalogue -->
+    <header class="catalogue-entete" data-reveal>
+      <div>
+        <p class="surtitre-section">Explorez notre patrimoine</p>
+
+        <h2 id="titre-catalogue">Toutes nos histoires</h2>
+
+        <p class="catalogue-intro">
+          Des histoires à découvrir, des traditions à comprendre,
+          un patrimoine à transmettre.
+        </p>
+      </div>
+
+      <p class="nombre-resultats" aria-live="polite">
+        <strong>{{ contenusFiltres().length }}</strong>
+        {{ contenusFiltres().length > 1
+          ? 'histoires trouvées'
+          : 'histoire trouvée' }}
+      </p>
+    </header>
+
+    <!-- Recherche -->
+    <div class="recherche" data-reveal>
+      <i class="bi bi-search" aria-hidden="true"></i>
+
+      <input
+        #champRecherche
+        type="search"
+        placeholder="Rechercher une histoire..."
+        aria-label="Rechercher dans les titres et les résumés"
+        [ngModel]="recherche()"
+        (ngModelChange)="changerRecherche($event)"
+      />
+
+      @if (recherche()) {
+        <button
+          type="button"
+          class="effacer-recherche"
+          aria-label="Effacer la recherche"
+          (click)="champRecherche.value = ''; changerRecherche('')"
+        >
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      }
+    </div>
+
+    <!-- Filtres -->
+    <div class="zone-filtres" data-reveal>
+      <div class="filtres-categories">
+        <p class="libelle-filtre">Catégories</p>
+
+        <div
+          class="liste-categories"
+          aria-label="Filtrer par catégorie"
+        >
+          <button
+            type="button"
+            class="bouton-categorie"
+            [class.active]="categorieActive() === 'toutes'"
+            [attr.aria-pressed]="categorieActive() === 'toutes'"
+            (click)="choisirCategorie('toutes')"
+          >
+            Toutes
+          </button>
+
+          @for (categorie of categories(); track categorie.slug) {
+            <button
+              type="button"
+              class="bouton-categorie"
+              [class.active]="categorieActive() === categorie.slug"
+              [attr.aria-pressed]="categorieActive() === categorie.slug"
+              (click)="choisirCategorie(categorie.slug)"
+            >
+              {{ categorie.nom }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="filtres-secondaires">
+
+        <label class="champ-filtre">
+          <span>Région</span>
+
+          <select
+            [ngModel]="regionActive()"
+            (ngModelChange)="choisirRegion($event)"
+            aria-label="Filtrer par région"
+          >
+            <option value="toutes">Toutes les régions</option>
+
+            @for (region of regionsDisponibles(); track region.slug) {
+              <option [value]="region.slug">
+                {{ region.nom }}
+              </option>
+            }
+          </select>
+        </label>
+
+        <label class="champ-filtre">
+          <span>Trier par</span>
+
+          <select
+            [ngModel]="tri()"
+            (ngModelChange)="choisirTri($event)"
+            aria-label="Ordre de tri"
+          >
+            <option value="recentes">Plus récentes</option>
+            <option value="az">De A à Z</option>
+          </select>
+        </label>
+
+        @if (filtresActifs) {
+          <button
+            type="button"
+            class="reinitialiser"
+            (click)="reinitialiser()"
+          >
+            <i
+              class="bi bi-arrow-counterclockwise"
+              aria-hidden="true"
+            ></i>
+            Réinitialiser
+          </button>
+        }
+
+      </div>
+    </div>
+
+    <!-- Résultats -->
+    @if (contenusFiltres().length > 0) {
+
+      <div class="grille-culture" id="grille-culture">
+        @for (contenu of contenusAffiches(); track contenu.id) {
+          <app-carte-contenu
+            data-reveal
+            [contenu]="contenu"
+            [region]="nomRegion(contenu.regionSlug)"
+            [categorie]="nomCategorie(contenu.categorieSlug)"
+            mode="catalogue"
+          />
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages() > 1) {
+        <nav
+          class="pagination"
+          aria-label="Pagination des histoires"
+          data-reveal
+        >
+          <button
+            type="button"
+            class="bouton-page bouton-navigation"
+            [disabled]="page() === 1"
+            (click)="changerPage(page() - 1)"
+          >
+            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+            <span class="texte-navigation">Précédent</span>
+          </button>
+
+          <div class="numeros-pages">
+            @for (
+              numero of [].constructor(totalPages());
+              track $index
+            ) {
+              <button
+                type="button"
+                class="bouton-page"
+                [class.active]="page() === $index + 1"
+                [attr.aria-current]="page() === $index + 1
+                  ? 'page'
+                  : null"
+                [attr.aria-label]="'Page ' + ($index + 1)"
+                (click)="changerPage($index + 1)"
+              >
+                {{ $index + 1 }}
+              </button>
+            }
+          </div>
+
+          <span class="indicateur-mobile">
+            Page {{ page() }} sur {{ totalPages() }}
+          </span>
+
+          <button
+            type="button"
+            class="bouton-page bouton-navigation"
+            [disabled]="page() === totalPages()"
+            (click)="changerPage(page() + 1)"
+          >
+            <span class="texte-navigation">Suivant</span>
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+        </nav>
+      }
+
+    } @else {
+
+      <!-- Aucun résultat -->
+      <div class="aucun-resultat" data-reveal>
+        <div class="icone-vide">
+          <i
+            class="bi bi-journal-bookmark"
+            aria-hidden="true"
+          ></i>
+        </div>
+
+        <h3>Aucune histoire trouvée</h3>
+
+        <p>
+          Nous n’avons trouvé aucune histoire correspondant à tes critères.
+          Essaie une autre recherche ou modifie les filtres.
+        </p>
+
+        <button
+          type="button"
+          class="bouton-reinitialiser"
+          (click)="reinitialiser()"
+        >
+          Voir toutes les histoires
+        </button>
+      </div>
+
+    }
+
+  </section>
+
+</main>
